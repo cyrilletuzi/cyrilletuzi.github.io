@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Java to ES6 / TypeScript guide by Cyrille Tuzi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="../stylesheets/highlight-default-9.5.0.min.css">
+    <style>
+        pre {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+  </head>
+  <body>
+
+    <header class="page-header">
+      <h1 class="project-name">Java to ES6 / TypeScript guide</h1>
+    </header>
+
+    <div class="main-content">
+
+      <p><a href="./">Explanation of the how and why of this guide available here, with other guides.</a></p>
+
+      <main>
+
+      <article>
+      
+      <h3>Data declarations</h3>
+
+      <p>In JavaScript, variables can be declared globally and values are always mutable. 
+          In ES6, use only the <code class="js">let</code> keyword.</p>
+      
+      <pre>
+        <code class="java">String myData = 'java';</code>
+        <code class="ts">let myData = 'js';</code>
+      </pre>
+
+      <p>ES6 introduces global constants in JavaScript. Complex values can be used and therefore manipulated.</p>
+      
+      <pre>
+<code class="java">final String MY_DATA = 'java';</code>
+<code class="ts">const MY_DATA = 'js';
+const MY_USER = new User(); // OK
+MY_USER.name = 'New name';</code>
+      </pre>
+
+      <h3>Simple data types</h3>
+
+      <p>In vanilla JavaScript, types are dynamic (a variable can change its type at any time). 
+          TypeScript allows static types. 
+          All numbers share the same type in JavaScript.</p>
+      
+      <pre>
+<code class="java">boolean userMan = true;
+int userAge = 81;
+float userAverage = 10.5;
+String userName = 'Henri Bergson';</code>
+<code class="ts">let userMan: boolean = true;
+let userAge: number = 81;
+let userAverage: number = 10.5;
+let userName: string = 'Henri Bergson';</code>
+      </pre>
+
+      <p>In addition to <code class="js">null</code>, JavaScript has the <code class="js">undefined</code> type, 
+        and <code class="js">NaN</code> (Not a Number). They are errors, so do <b>not</b> use them.</p>
+
+      <h3>String details</h3>
+
+      <p>ES6 introduces new backtick quotes for variable interpolation and allowing line breaks.
+        Avoid classic concatenation in JavaScript, as it's confusing with additions and will lead to type changes.
+      </p>
+
+      <pre>
+<code class="java">String userFullName  = 
+  userFirstName + ' ' + userLastName;</code>
+<code class="ts">let userFullName: string = 
+  `${userFirstName} ${userLastName}`;</code>
+      </pre>
+
+      <p>Also useful to manage simple and double quotes in the same string.</p>
+
+      <pre>
+<code class="ts">let HTMLTemplate: string = `&lt;p class="content"&gt;I'm Henri !&lt;/p&gt;`;</code>
+      </pre>
+
+      <h3>Data lists</h3>
+
+      <p>Size of arrays is always dynamic in JavaScript.</p>
+
+      <pre>
+<code class="java">ArrayList&lt;String&gt; userBooks = 
+  new ArrayList&lt;String&gt;();
+userBooks.add('Book 1');
+userBooks.get(0);
+userBooks.size();</code>
+<code class="ts">let userBooks: string[] = 
+  ['Book 1', 'Book 2'];
+userBooks.push('Book 3');
+userBooks[0];
+userBooks.length;</code>
+      </pre>
+
+      <p>Hash maps are called objects in JavaScript.</p>
+
+      <pre>
+<code class="java">HashMap&lt;String, String&gt; user = 
+  new HashMap&lt;String, String&gt;();
+user.put('firstName', 'Henri');
+user.put('lastName', 'Bergson');
+user.get('firstName');
+</code>
+<code class="ts">let user = {
+  firstName: 'Henri', 
+  lastName: 'Bergson'
+};
+user.firstName;
+</code>
+      </pre>
+
+      <h3>Blocks</h3>
+
+      <p>Same conditions syntax.</p>
+
+      <p>In ES6, thanks to <code class="js">let</code>, variables are block-scoped.</p>
+
+      <pre>
+<code class="ts">for (var i: number = 0; i < 10; i++) {}
+i; // 10, error prone</code>
+<code class="ts">for (let i: number = 0; i < 10; i++) {}
+i; // undefined</code>
+      </pre>
+
+      <p>Iteration is simplified in ES6. Do not indicate the type of <code class="ts">value</code> in TypeScript.</p>
+
+      <pre>
+<code class="java">for (String value: userBooks) {}</code>
+<code class="ts">for (let value of userBooks) {}</code>
+      </pre>
+
+      <p>Another option for complex iterations.</p>
+
+      <pre>
+<code class="java">for (int i = 0; i < books.size(); i++) {
+    books.get(i);
+}</code>
+<code class="ts">books.foreach(
+  function (value: string, index: number) {});</code>
+      </pre>
+
+      <h3>Functions</h3>
+
+      <p>In JavaScript, you can access parent scopes directly.</p>
+
+      <pre>
+<code class="java">String myData = 'java';
+void myMethod() {
+  myData; // null
+}</code>
+<code class="ts">let myData: string = 'js';
+function myMethod(): void {
+  myData; // 'js'
+}</code>
+      </pre>
+
+      <p>No overriding in JavaScript (a function can only have one definition), 
+          and parameters are always optional. ES6 introduces default values.
+          TypeScript allow automatic required arguments without manual checking.
+      </p>
+
+      <pre>
+<code class="java">void myMethod(String required) {
+  myMethod(required, 'default');
+}
+void myMethod
+  (String required, String optional) {}</code>
+<code class="ts">function myMethod
+  (required: string, 
+    optional: string = 'default'): void {}</code>
+      </pre>
+
+      <p>ES6 introduces a shorter anonymous functions syntax, named arrow functions.</p>
+
+      <pre>
+<code class="ts">numbersList.map(value: number => value * 2);</code>
+      </pre>
+
+      <h3>Built-in functions</h3>
+
+      <p>All functions are methods in JavaScript, and so are called from an object.</p>
+
+      <pre>
+<code class="java">myEmail.strpos('@');
+myEmail.replaceAll('(.*)@(.*)', ' at ');
+myEmail.substr(0, 5);
+Integer.parseInt('10');</code>
+<code class="ts">myEmail.strpos('@');
+myEmail.replace('@', ' at ');
+myEmail.substr(0, 5);
+parseInt('10');</code>
+      </pre>
+
+      <p>When a function seems to be called directly, like <code class="js">setTimeout()</code>, 
+      it's because the global object is implicit : <code class="js">window.setTimeout()</code>.
+      <b>Do</b> use the shorthand, as the global object is not always <code class="js">window</code>.
+      
+      <h3>Classes</h3>
+
+      <p>ES6 introduces classes syntax, to simplify object oriented programming in JavaScript. 
+        Properties are directly created in the constructor. 
+        Pre-declared properties may appear in future JavaScript versions.
+        No visibility yet in ES6, it is allowed by TypeScript.</p>
+
+      <pre>
+<code class="java">public class User {
+  public String firstName;
+  public User(String firstName) {
+    this.firstName = firstName;
+  }
+  public void sayHello() {}
+}
+
+User myUser = new User('Henri');
+myUser.firstName;
+myUser.sayHello();</code>
+<code class="ts">class User {
+
+  public constructor(firstName: string) {
+    this.firstName = firstName;
+  }
+  public sayHello(): void {}
+}
+
+let myUser: User = new User('Henri');
+myUser.firstName;
+myUser.sayHello();</code>
+      </pre>
+
+      <p>In JavaScript inheritance, parent call is <b>required</b> in the child constructor.</p>
+
+      <pre>
+<code class="java">public class Editor extends User {
+  public Editor(String firstName) {
+    super(firstName);
+  }
+  public void sayHello() {
+    super.sayHello();
+  }
+}</code>
+<code class="ts">class Editor extends User {
+  public constructor(firstName: string) {
+    super(firstName);
+  }
+  publix sayHello(): void {
+    super.sayHello();
+  }
+}</code>
+      </pre>
+
+      <p>Getters and setters have a special syntax in JavaScript (but you can do classic accessors too).
+          Do not pre-declared the property, it is done internally.</p>
+
+      <pre>
+<code class="java">public class User {
+  protected String name;
+  public String getName() {
+    return this.name;
+  }
+  public void setName(String newName) {
+    this.name = newName;
+  }
+}
+
+User myUser = new User('Henri');
+myUser.getName();
+myUser.setName('New name');</code>
+<code class="ts">class User {
+  private _name: string;
+  get name(): string {
+    return this._name;
+  }
+  set name(newName: string): void {
+    this._name = newName;
+  }
+}
+
+myUser: User = new User('Henri');
+myUser.name;
+myUser.name = 'New name';</code>
+      </pre>
+
+      <p>Same syntax for static methods in ES6.
+          Same syntax for static properties and abstract classes in TypeScript.
+          TypeScript also adds interfaces.</p>
+
+      <pre>
+<code class="java">public interface Movable {
+  public void move();
+}
+
+public class Vehicle implements Movable {
+    public void move() {}
+}</code>
+<code class="ts">interface Movable {
+  public move(): void;
+}
+
+class Vehicle implements Movable {
+    public move(): void {}
+}</code>
+      </pre> 
+      
+      <h3>Namespaces</h3>
+
+      <p>Namespacing is directly managed by the loading system in ES6 : 
+        if there is the <code class="js">export</code> or <code class="js">import</code> keyword, 
+        then you are not anymore in the global scope.</p>
+
+      <pre>
+<code class="php">// User.java
+package accounts;
+
+public class User {}
+
+// script.java
+import accounts.User;
+
+User myUser = new User();</code>
+<code class="js">// User.js
+
+
+export class User {}
+
+// script.js
+import { User } from './module.js';
+
+let myUser = new User();</code>
+      </pre>
+
+      <h3>JavaScript courses</h3>
+
+      <p>If you're looking for JavaScript full courses in France, check my <a href="https://formationjavascript.com/" target="_blank">training website</a>.</p>
+
+      </article>
+
+      </main>
+
+      <footer class="site-footer">
+        <span class="site-footer-credits">A project by <a href="https://www.cyrilletuzi.com/en/web/" target="_blank">Cyrille Tuzi</a>. This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </div>
+
+    <script src="../scripts/highlight-custom-9.5.0.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+  </body>
+</html>

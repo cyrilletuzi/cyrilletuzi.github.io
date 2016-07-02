@@ -247,9 +247,9 @@ myMethod(); // OK</code>
       <pre>
 <code class="php">mb_strpos($myEmail, '@');
 str_replace('@', '[at]', $myEmail);
-substr($myEmail, 0, 5);
+mb_substr($myEmail, 0, 5);
 (int) '10';</code>
-<code class="js">myEmail.strpos('@');
+<code class="js">myEmail.indexOf('@');
 myEmail.replace('@', '[at]');
 myEmail.substr(0, 5);
 parseInt('10');</code>
