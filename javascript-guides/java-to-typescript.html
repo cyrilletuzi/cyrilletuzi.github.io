@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Java to ES6 / TypeScript guide by Cyrille Tuzi</title>
+    <title>Java to JavaScript / TypeScript guide by Cyrille Tuzi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -19,16 +19,33 @@
   <body>
 
     <header class="page-header">
-      <h1 class="project-name">Java to ES6 / TypeScript guide</h1>
+      <h1 class="project-name">Java to JavaScript / TypeScript guide</h1>
     </header>
 
     <div class="main-content">
 
-      <p><a href="./">Explanation of the how and why of this guide available here, with other guides.</a></p>
+      <p><a href="./">General explanation of the how and why of this guide available here, with other guides.</a></p>
 
       <main>
 
       <article>
+
+      <h3>Why TypeScript ?</h3>
+
+      <p>As a Java developer, you'll love TypeScript. ES6 brings many new tools 
+        (like classes syntax, modules imports and exports...), bringing JavaScript closer to Java
+        for big and serious developments, but some features are still missing (like static data types and 
+        some basic tools in object oriented programming), and, I tell you, you'll be very frustrated about that.</p>
+
+      <p>TypeScript adds these missing features in a very clever way. 
+        Valid vanilla JavaScript is valid TypeScript : the new features are completely optional,
+        and you can come back to pure JS at any time.</p>
+
+      <p>Of course, you'll need to transform TypeScript in standard JavaScript for the browsers, 
+        but for now you'd need to transform ES6 to ES5 anyway for browsers compatibility reasons
+        (and as a Java developer, you'll rather be happy about a build step instead of afraid).</p>
+
+      <p>This guide tells clearly when a feature is TypeScript specific. Eveything else is standard JavaScript.</p>
       
       <h3>Data declarations</h3>
 
@@ -36,8 +53,10 @@
           In ES6, use only the <code class="js">let</code> keyword.</p>
       
       <pre>
-        <code class="java">String myData = 'java';</code>
-        <code class="ts">let myData = 'js';</code>
+        <code class="java">String myData = 'java';
+myData = 'new value'; // Error</code>
+        <code class="ts">let myData = 'js';
+myData = 'new value'; // OK</code>
       </pre>
 
       <p>ES6 introduces global constants in JavaScript. Complex values can be used and therefore manipulated.</p>
@@ -51,9 +70,9 @@ MY_USER.name = 'New name';</code>
 
       <h3>Simple data types</h3>
 
-      <p>In vanilla JavaScript, types are dynamic (a variable can change its type at any time). 
-          TypeScript allows static types. 
-          All numbers share the same type in JavaScript.</p>
+      <p>In vanilla JavaScript, data types are dynamic (a variable can change its type at any time),
+         and you don't need to specify them (they are automatically detected). 
+        TypeScript adds manifest and static types. All numbers share the same type in JavaScript.</p>
       
       <pre>
 <code class="java">boolean userMan = true;
@@ -72,7 +91,7 @@ let userName: string = 'Henri Bergson';</code>
       <h3>String details</h3>
 
       <p>ES6 introduces new backtick quotes for variable interpolation and allowing line breaks.
-        Avoid classic concatenation in JavaScript, as it's confusing with additions and will lead to type changes.
+        Avoid classic concatenation in JavaScript, as it's confusing with additions and will lead to type errors.
       </p>
 
       <pre>
@@ -105,7 +124,7 @@ userBooks[0];
 userBooks.length;</code>
       </pre>
 
-      <p>Hash maps are called objects in JavaScript.</p>
+      <p>Hash maps are called objects in JavaScript, with string keys.</p>
 
       <pre>
 <code class="java">HashMap&lt;String, String&gt; user = 
@@ -124,7 +143,7 @@ user.firstName;
 
       <h3>Blocks</h3>
 
-      <p>Same conditions syntax.</p>
+      <p>Same syntax for conditions.</p>
 
       <p>In ES6, thanks to <code class="js">let</code>, variables are block-scoped.</p>
 
@@ -135,14 +154,15 @@ i; // 10, error prone</code>
 i; // undefined</code>
       </pre>
 
-      <p>Iteration is simplified in ES6. Do not indicate the type of <code class="ts">value</code> in TypeScript.</p>
+      <p>Iteration is simplified in ES6. 
+        Do not indicate the type of <code class="ts">value</code> in TypeScript (it's automatically detected).</p>
 
       <pre>
 <code class="java">for (String value: userBooks) {}</code>
 <code class="ts">for (let value of userBooks) {}</code>
       </pre>
 
-      <p>Another option for complex iterations.</p>
+      <p>Another option for complex iterations (with values <i>and</i> keys).</p>
 
       <pre>
 <code class="java">for (int i = 0; i < books.size(); i++) {
@@ -169,7 +189,8 @@ function myMethod(): void {
 
       <p>No overriding in JavaScript (a function can only have one definition), 
           and parameters are always optional. ES6 introduces default values.
-          TypeScript allow automatic required arguments without manual checking.
+          TypeScript allow automatic required arguments without manual checking 
+          (one of the only major differences with vanilla JS).
       </p>
 
       <pre>
@@ -186,12 +207,12 @@ void myMethod
       <p>ES6 introduces a shorter anonymous functions syntax, named arrow functions.</p>
 
       <pre>
-<code class="ts">numbersList.map(value: number => value * 2);</code>
+<code class="ts">numbersList.map((value: number) => value * 2);</code>
       </pre>
 
-      <h3>Built-in functions</h3>
+      <h3>Built-in methods</h3>
 
-      <p>All functions are methods in JavaScript, and so are called from an object.</p>
+      <p>Some basic methods.</p>
 
       <pre>
 <code class="java">myEmail.strpos('@');
@@ -204,16 +225,16 @@ myEmail.substr(0, 5);
 parseInt('10');</code>
       </pre>
 
-      <p>When a function seems to be called directly, like <code class="js">setTimeout()</code>, 
-      it's because the global object is implicit : <code class="js">window.setTimeout()</code>.
+      <p>When a function seems to be called directly, like <code class="js">parseInt()</code>, 
+      it's because the global object is implicit : <code class="js">window.parseInt()</code>.
       <b>Do</b> use the shorthand, as the global object is not always <code class="js">window</code>.
       
       <h3>Classes</h3>
 
       <p>ES6 introduces classes syntax, to simplify object oriented programming in JavaScript. 
         Properties are directly created in the constructor. 
-        Pre-declared properties may appear in future JavaScript versions.
-        No visibility yet in ES6, it is allowed by TypeScript.</p>
+        Pre-declared properties and visibility modifiers are missing in ES6 : 
+        they may appear in future JavaScript versions, but TypeScript allows them right now.</p>
 
       <pre>
 <code class="java">public class User {
@@ -228,7 +249,7 @@ User myUser = new User('Henri');
 myUser.firstName;
 myUser.sayHello();</code>
 <code class="ts">class User {
-
+  public firstName: string;
   public constructor(firstName: string) {
     this.firstName = firstName;
   }
@@ -279,16 +300,16 @@ User myUser = new User('Henri');
 myUser.getName();
 myUser.setName('New name');</code>
 <code class="ts">class User {
-  private _name: string;
-  get name(): string {
+  protected _name: string;
+  public get name(): string {
     return this._name;
   }
-  set name(newName: string): void {
+  public set name(newName: string) {
     this._name = newName;
   }
 }
 
-myUser: User = new User('Henri');
+let myUser: User = new User('Henri');
 myUser.name;
 myUser.name = 'New name';</code>
       </pre>
@@ -318,10 +339,13 @@ class Vehicle implements Movable {
 
       <p>Namespacing is directly managed by the loading system in ES6 : 
         if there is the <code class="js">export</code> or <code class="js">import</code> keyword, 
-        then you are not anymore in the global scope.</p>
+        then you are not anymore in the global scope.
+        Be careful : <code>.js</code> extension is required in ES6 imports, but in TypeScript, 
+        as you'll need to manage both <code>.ts</code> in development and <code>.js</code> in production, 
+        it's better to configure the loader to automatically add the right extension.</p>
 
       <pre>
-<code class="php">// User.java
+<code class="java">// User.java
 package accounts;
 
 public class User {}
@@ -330,15 +354,15 @@ public class User {}
 import accounts.User;
 
 User myUser = new User();</code>
-<code class="js">// User.js
+<code class="ts">// User.ts
 
 
 export class User {}
 
-// script.js
-import { User } from './module.js';
+// script.ts
+import { User } from './module';
 
-let myUser = new User();</code>
+let myUser: User = new User();</code>
       </pre>
 
       <h3>JavaScript courses</h3>
