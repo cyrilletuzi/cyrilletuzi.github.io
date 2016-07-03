@@ -340,24 +340,32 @@ myUser.name;
 myUser.name = 'New name';</code>
       </pre>
 
-      <p>Same syntax for static methods in JavaScript.
-          Same syntax for static properties and abstract classes in TypeScript.
-          TypeScript also adds 
-          <a href="http://www.typescriptlang.org/docs/handbook/interfaces.html" target="_blank">interfaces</a>.</p>
+      <p>Same syntax for static methods in JavaScript.</p>
+
+      <pre>
+        <code class="ts">class Utilities {
+          static filter() {}
+        }
+
+        Utilities.filter();</code>
+      </pre>
+      
+      <p>TypeScript adds abstract classes and 
+        <a href="http://www.typescriptlang.org/docs/handbook/interfaces.html" target="_blank">interfaces</a>.</p>
 
       <pre>
 <code class="java">public interface Movable {
   public void move();
 }
 
-public class Vehicle implements Movable {
+public abstract class Vehicle implements Movable {
     public void move() {}
 }</code>
 <code class="ts">interface Movable {
   public move(): void;
 }
 
-class Vehicle implements Movable {
+abstract class Vehicle implements Movable {
     public move(): void {}
 }</code>
       </pre> 
