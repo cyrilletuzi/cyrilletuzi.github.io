@@ -343,11 +343,11 @@ myUser.name = 'New name';</code>
       <p>Same syntax for static methods in JavaScript.</p>
 
       <pre>
-        <code class="ts">class Utilities {
-          static filter() {}
-        }
+<code class="ts">class Utilities {
+  static filter() {}
+}
 
-        Utilities.filter();</code>
+Utilities.filter();</code>
       </pre>
       
       <p>TypeScript adds abstract classes and 
@@ -358,16 +358,20 @@ myUser.name = 'New name';</code>
   public void move();
 }
 
-public abstract class Vehicle implements Movable {
+public class Vehicle implements Movable {
     public void move() {}
-}</code>
+}
+
+public abstract class Test {}</code>
 <code class="ts">interface Movable {
   public move(): void;
 }
 
-abstract class Vehicle implements Movable {
+class Vehicle implements Movable {
     public move(): void {}
-}</code>
+}
+
+abstract class Test {}</code>
       </pre> 
       
       <h3>Namespaces</h3>
