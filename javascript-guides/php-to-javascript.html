@@ -263,11 +263,27 @@ myMethod(); // OK</code>
 <code class="php">mb_strpos($myEmail, '@');
 str_replace('@', '[at]', $myEmail);
 mb_substr($myEmail, 0, 5);
-(int) '10';</code>
+mb_strlen($myEmail);
+(int) '10';
+array_key_exists('name', $user);
+in_array('Book 1', $userBooks);
+time();
+var_dump($varToDebug);
+json_encode($user);
+json_decode('{}');</code>
 <code class="js">myEmail.indexOf('@');
 myEmail.replace('@', '[at]');
 myEmail.substr(0, 5);
-parseInt('10');</code>
+myEmail.length;
+parseInt('10');
+'name' in user;
+userBooks.includes('Book 1');
+Date.now();
+console.log(varToDebug);
+JSON.strinfigy(user);
+try {
+  JSON.parse('{}');
+} catch (error) {}</code>
       </pre>
 
       <p>When a function seems to be called directly, like <code class="js">parseInt()</code>, 
