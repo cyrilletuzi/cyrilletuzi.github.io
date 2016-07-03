@@ -24,25 +24,34 @@
 
     <div class="main-content">
 
-      <p><a href="./">General explanation of the how and why of this guide available here, with other guides.</a></p>
-
       <main>
 
       <article>
 
+      <p>This guide presents a comparison of the basic syntax from Java (left side) to JavaScript / TypeScript (right side). 
+        Be aware this guide just <i>compare</i> languages, it does <i>not</i> explain the features 
+        (you'll find links to official documentation).
+        A general explanation of the purpose of this page is available <a href="./" title="General explanation of the purpose of this page and other guides">here</a>, also with other guides.</p>
+
+      <p><a href="https://www.oracle.com/java/index.html" target="_blank">Java</a> 7 minimum is assumed 
+        and the current JavaScript standard, 
+        <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm" target="_blank">ES7</a> 
+        (also known as ES2016).</p>
+
       <h3>Why TypeScript ?</h3>
 
-      <p>As a Java developer, you'll love TypeScript. ES6 brings many new tools 
+      <p>As a Java developer, you'll love <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>. 
+        ES6 brought many new tools 
         (like classes syntax, modules imports and exports...), bringing JavaScript closer to Java
         for big and serious developments, but some features are still missing (like static data types and 
-        some basic tools in object oriented programming), and, I tell you, you'll be very frustrated about that.</p>
+        some basic tools in object oriented programming), and you'll be very frustrated about that.</p>
 
       <p>TypeScript adds these missing features in a very clever way. 
         Valid vanilla JavaScript is valid TypeScript : the new features are completely optional,
         and you can come back to pure JS at any time.</p>
 
       <p>Of course, you'll need to transform TypeScript in standard JavaScript for the browsers, 
-        but for now you'd need to transform ES6 to ES5 anyway for browsers compatibility reasons
+        but for now you'd need to transform ES7 to ES5 anyway for browsers compatibility reasons
         (and as a Java developer, you'll rather be happy about a build step instead of afraid).</p>
 
       <p>This guide tells clearly when a feature is TypeScript specific. Eveything else is standard JavaScript.</p>
@@ -50,7 +59,8 @@
       <h3>Data declarations</h3>
 
       <p>In JavaScript, variables can be declared globally and values are always mutable. 
-          In ES6, use only the <code class="js">let</code> keyword.</p>
+          Since ES6, use only the 
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" target="_blank"><code class="js">let</code> keyword</a>.</p>
       
       <pre>
         <code class="java">String myData = 'java';
@@ -59,7 +69,8 @@ myData = 'new value'; // Error</code>
 myData = 'new value'; // OK</code>
       </pre>
 
-      <p>ES6 introduces global constants in JavaScript. Complex values can be used and therefore manipulated.</p>
+      <p>ES6 introduced global <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const" target="_blank">constants</a> 
+      in JavaScript. Complex values can be used and therefore manipulated.</p>
       
       <pre>
 <code class="java">final String MY_DATA = 'java';</code>
@@ -72,7 +83,8 @@ MY_USER.name = 'New name';</code>
 
       <p>In vanilla JavaScript, data types are dynamic (a variable can change its type at any time),
          and you don't need to specify them (they are automatically detected). 
-        TypeScript adds manifest and static types. All numbers share the same type in JavaScript.</p>
+        TypeScript adds manifest and <a href="http://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">static types</a>. 
+        All numbers share the same type in JavaScript.</p>
       
       <pre>
 <code class="java">boolean userMan = true;
@@ -90,7 +102,8 @@ let userName: string = 'Henri Bergson';</code>
 
       <h3>String details</h3>
 
-      <p>ES6 introduces new backtick quotes for variable interpolation and allowing line breaks.
+      <p>ES6 introduced <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" target="_blank">template literals</a> : 
+        new backtick quotes for variable interpolation and allowing line breaks.
         Avoid classic concatenation in JavaScript, as it's confusing with additions and will lead to type errors.
       </p>
 
@@ -145,7 +158,7 @@ user.firstName;
 
       <p>Same syntax for conditions.</p>
 
-      <p>In ES6, thanks to <code class="js">let</code>, variables are block-scoped.</p>
+      <p>Since ES6, thanks to <code class="js">let</code>, variables are block-scoped.</p>
 
       <pre>
 <code class="ts">for (var i: number = 0; i < 10; i++) {}
@@ -154,15 +167,17 @@ i; // 10, error prone</code>
 i; // undefined</code>
       </pre>
 
-      <p>Iteration is simplified in ES6. 
-        Do not indicate the type of <code class="ts">value</code> in TypeScript (it's automatically detected).</p>
+      <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of" target="_blank">Iteration</a> 
+        is simplified in ES6. 
+        Do not indicate the type of <code class="ts">value</code> in TypeScript (it's automatically inferred).</p>
 
       <pre>
 <code class="java">for (String value: userBooks) {}</code>
 <code class="ts">for (let value of userBooks) {}</code>
       </pre>
 
-      <p>Another option for complex iterations (with values <i>and</i> keys).</p>
+      <p>Another option for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach" target="_blank">complex iterations</a> 
+      (with values <i>and</i> keys, only for arrays).</p>
 
       <pre>
 <code class="java">for (int i = 0; i < books.size(); i++) {
@@ -188,7 +203,8 @@ function myMethod(): void {
       </pre>
 
       <p>No overriding in JavaScript (a function can only have one definition), 
-          and parameters are always optional. ES6 introduces default values.
+          and parameters are always optional. 
+          ES6 introduced <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters" target="_blank">default values</a>.
           TypeScript allow automatic required arguments without manual checking 
           (one of the only major differences with vanilla JS).
       </p>
@@ -204,7 +220,8 @@ void myMethod
     optional: string = 'default'): void {}</code>
       </pre>
 
-      <p>ES6 introduces a shorter anonymous functions syntax, named arrow functions.</p>
+      <p>ES6 introduced a shorter anonymous functions syntax, named 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank">arrow functions</a>.</p>
 
       <pre>
 <code class="ts">numbersList.map((value: number) => value * 2);</code>
@@ -231,10 +248,12 @@ parseInt('10');</code>
       
       <h3>Classes</h3>
 
-      <p>ES6 introduces classes syntax, to simplify object oriented programming in JavaScript. 
+      <p>ES6 introduced <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes" target="_blank">classes syntax</a>, 
+        to simplify object oriented programming in JavaScript. 
         Properties are directly created in the constructor. 
-        Pre-declared properties and visibility modifiers are missing in ES6 : 
-        they may appear in future JavaScript versions, but TypeScript allows them right now.</p>
+        Pre-declared properties and visibility modifiers are missing in ES7 : 
+        they may appear in future JavaScript versions, but 
+        <a href="http://www.typescriptlang.org/docs/handbook/classes.html" target="_blank">TypeScript allows them right now</a>.</p>
 
       <pre>
 <code class="java">public class User {
@@ -314,9 +333,10 @@ myUser.name;
 myUser.name = 'New name';</code>
       </pre>
 
-      <p>Same syntax for static methods in ES6.
+      <p>Same syntax for static methods in JavaScript.
           Same syntax for static properties and abstract classes in TypeScript.
-          TypeScript also adds interfaces.</p>
+          TypeScript also adds 
+          <a href="http://www.typescriptlang.org/docs/handbook/interfaces.html" target="_blank">interfaces</a>.</p>
 
       <pre>
 <code class="java">public interface Movable {
@@ -337,10 +357,11 @@ class Vehicle implements Movable {
       
       <h3>Namespaces</h3>
 
-      <p>Namespacing is directly managed by the loading system in ES6 : 
-        if there is the <code class="js">export</code> or <code class="js">import</code> keyword, 
+      <p>Namespacing is directly managed by the loading system since ES6 : 
+        if there is the <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/export" target="_blank"><code class="js">export</code> keyword</a> or 
+        <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/import" target="_blank"><code class="js">import</code> keyword</a>, 
         then you are not anymore in the global scope.
-        Be careful : <code>.js</code> extension is required in ES6 imports, but in TypeScript, 
+        Be careful : <code>.js</code> extension is required in JavaScript imports, but in TypeScript, 
         as you'll need to manage both <code>.ts</code> in development and <code>.js</code> in production, 
         it's better to configure the loader to automatically add the right extension.</p>
 
@@ -367,7 +388,7 @@ let myUser: User = new User();</code>
 
       <h3>JavaScript courses</h3>
 
-      <p>If you're looking for JavaScript full courses in France, check my <a href="https://formationjavascript.com/" target="_blank">training website</a>.</p>
+      <p>If you're looking for full JavaScript courses in France, check my <a href="https://formationjavascript.com/" target="_blank">training website</a>.</p>
 
       </article>
 

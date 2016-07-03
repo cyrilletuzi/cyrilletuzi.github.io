@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>PHP to JavaScript / ES6 guide by Cyrille Tuzi</title>
+    <title>PHP to JavaScript / ES7 guide by Cyrille Tuzi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -19,27 +19,36 @@
   <body>
 
     <header class="page-header">
-      <h1 class="project-name">PHP to JavaScript / ES6 guide</h1>
+      <h1 class="project-name">PHP to JavaScript / ES7 guide</h1>
     </header>
 
     <div class="main-content">
 
-      <p><a href="./">Explanation of the how and why of this guide available here, with other guides.</a></p>
-
       <main>
 
       <article>
+
+      <p>This guide presents a comparison of the basic syntax from PHP (left side) to JavaScript (right side). 
+        Be aware this guide just <i>compare</i> languages, it does <i>not</i> explain the features 
+        (you'll find links to official documentation).
+        A general explanation of the purpose of this page is available <a href="./" title="General explanation of the purpose of this page and other guides">here</a>, also with other guides.</p>
+
+      <p><a href="https://secure.php.net/" target="_blank">PHP</a> 5.6 minimum is assumed 
+        and the current JavaScript standard, 
+        <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm" target="_blank">ES7</a> 
+        (also known as ES2016).</p>
       
       <h3>Data declarations</h3>
 
-      <p>In JavaScript, variables <b>must</b> be declared first. In ES6, use only the <code class="js">let</code> keyword.</p>
+      <p>In JavaScript, variables <b>must</b> be declared first. Since ES6, use only the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" target="_blank"><code class="js">let</code> keyword</a>.</p>
       
       <pre>
         <code class="php">$myData = 'php';</code>
         <code class="js">let myData = 'js';</code>
       </pre>
 
-      <p>ES6 introduces constants in JavaScript. Complex values can be used and therefore manipulated.</p>
+      <p>ES6 introduced <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const" target="_blank">constants</a> in JavaScript. 
+      Complex values can be used and therefore manipulated.</p>
       
       <pre>
 <code class="php">const MY_DATA = 'php';
@@ -86,7 +95,8 @@ $userLastName  = 'Bergson';</code>
 let userLastName  = "Bergson";</code>
       </pre>
 
-      <p>ES6 introduces new backtick quotes for variable interpolation and allowing line breaks.
+      <p>ES6 introduced <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" target="_blank">template literals</a> : 
+        new backtick quotes for variable interpolation and allowing line breaks.
         Be careful with the brackets position and role : in PHP, they are here to isolate the variable to avoid confusion ;
         in JavaScript, they are here to allow an expression.
       </p>
@@ -169,7 +179,8 @@ else if (userAge > 21) {}</code>
 
       <p>In JavaScript, <code class="js">switch</code> cases are strict comparisons.</p>
 
-      <p>In ES6, thanks to <code class="js">let</code>, variables are block-scoped.</p>
+      <p>Since ES6, thanks to <code class="js">let</code>, 
+      variables are block-scoped.</p>
 
       <pre>
 <code class="php">for ($i = 0; $i < 10; $i++) {}
@@ -178,14 +189,17 @@ $i; // 10, error prone</code>
 i; // undefined</code>
       </pre>
 
-      <p>Iteration is simplified in ES6.</p>
+      <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of" target="_blank">Iteration</a> 
+      is simplified since ES6.</p>
 
       <pre>
 <code class="php">foreach ($userBooks as $value) {}</code>
 <code class="js">for (let value of userBooks) {}</code>
       </pre>
 
-      <p>Another option for complex iterations.</p>
+      <p>Another option for 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach" target="_blank">complex iterations</a> 
+        (only for arrays).</p>
 
       <pre>
 <code class="php">foreach ($userBooks as $key => $value) {}</code>
@@ -207,7 +221,8 @@ function myMethod() {
 }</code>
       </pre>
 
-      <p>In JavaScript, parameters are always optional. ES6 introduces default values.</p>
+      <p>In JavaScript, parameters are always optional. ES6 introduced 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters" target="_blank">default values</a>.</p>
 
       <pre>
 <code class="php">function myMethod
@@ -231,7 +246,8 @@ myMethod(); // OK</code>
 }</code>
       </pre>
 
-      <p>ES6 introduces a shorter anonymous functions syntax, named arrow functions.</p>
+      <p>ES6 introduced a shorter anonymous functions syntax, named 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank">arrow functions</a>.</p>
 
       <pre>
 <code class="php">array_map(function ($value) {
@@ -255,13 +271,14 @@ myEmail.substr(0, 5);
 parseInt('10');</code>
       </pre>
 
-      <p>When a function seems to be called directly, like <code class="js">setTimeout()</code>, 
-      it's because the global object is implicit : <code class="js">window.setTimeout()</code>.
+      <p>When a function seems to be called directly, like <code class="js">parseInt()</code>, 
+      it's because the global object is implicit : <code class="js">window.parseInt()</code>.
       <b>Do</b> use the shorthand, as the global object is not always <code class="js">window</code>.
       
       <h3>Classes</h3>
 
-      <p>ES6 introduces classes syntax, to simplify object oriented programming in JavaScript. 
+      <p>ES6 introduced <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes" target="_blank">classes syntax</a>, 
+        to simplify object oriented programming in JavaScript. 
         Properties are directly created in the constructor. 
         Pre-declared properties may appear in future JavaScript versions.</p>
 
@@ -357,13 +374,15 @@ Utilities::filter();</code>
 Utilities.filter();</code>
       </pre>
 
-      <p>For now, there is no visibility options, no interfaces and no abstract classes in ES6. 
-        It may appear in future JavaScript versions. A good option is to use <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>.</p>
+      <p>For now, there is no visibility modifiers, no interfaces and no abstract classes in ES7. 
+        It may appear in future JavaScript versions. 
+        A good option is to use <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>.</p>
 
       <h3>Namespaces</h3>
 
-      <p>Namespacing is directly managed by the loading system in ES6 : 
-        if there is the <code class="js">export</code> or <code class="js">import</code> keyword, 
+      <p>Namespacing is directly managed by the loading system since ES6 : 
+        if there is the <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/export" target="_blank"><code class="js">export</code> keyword</a> or 
+        <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/import" target="_blank"><code class="js">import</code> keyword</a>, 
         then you are not anymore in the global scope.</p>
 
       <pre>
