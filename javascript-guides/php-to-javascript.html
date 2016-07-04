@@ -10,9 +10,14 @@
     <link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" href="../stylesheets/highlight-default-9.5.0.min.css">
     <style>
-        pre {
+        .main-content pre {
             display: flex;
             justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .main-content pre>code {
+            white-space: pre-wrap;
         }
     </style>
   </head>
@@ -42,17 +47,21 @@
       <p>In JavaScript, variables <b>must</b> be declared first. Since ES6, use only the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" target="_blank"><code class="js">let</code> keyword</a>.</p>
       
       <pre>
-        <code class="php">$myData = 'php';</code>
-        <code class="js">let myData = 'js';</code>
+        <code class="php">/* PHP */
+$myData = 'php';</code>
+        <code class="js">/* JavaScript */
+let myData = 'js';</code>
       </pre>
 
       <p>ES6 introduced <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const" target="_blank">constants</a> in JavaScript. 
       Complex values can be used and therefore manipulated.</p>
       
       <pre>
-<code class="php">const MY_DATA = 'php';
+<code class="php">/* PHP */
+const MY_DATA = 'php';
 const MY_USER = new User(); // Error</code>
-<code class="js">const MY_DATA = 'js';
+<code class="js">/* JavaScript */
+const MY_DATA = 'js';
 const MY_USER = new User(); // OK
 MY_USER.name = 'New name';</code>
       </pre>
@@ -62,21 +71,15 @@ MY_USER.name = 'New name';</code>
       <p>Integers and decimal numbers share the same type in JavaScript.</p>
       
       <pre>
-<code class="php">/** @var bool */
+<code class="php">/* PHP */
 $userMan = true;
-/** @var int */
 $userAge = 81;
-/** @var float */
 $userAverage = 10.5;
-/** @var string */
 $userName = 'Henri Bergson';</code>
-<code class="js">/** @type {boolean} */
+<code class="js">/* JavaScript */
 let userMan = true;
-/** @type {number} */
 let userAge = 81;
-/** @type {number} */
 let userAverage = 10.5;
-/** @type {string} */
 let userName = 'Henri Bergson';</code>
       </pre>
 
@@ -88,9 +91,11 @@ let userName = 'Henri Bergson';</code>
       <p>In JavaScript, line breaks are <b>not</b> allowed in simple or double quotes.</p>
 
       <pre>
-<code class="php">$userFirstName = 'Henri';
+<code class="php">/* PHP */
+$userFirstName = 'Henri';
 $userLastName  = 'Bergson';</code>
-<code class="js">let userFirstName = 'Henri';
+<code class="js">/* JavaScript */
+let userFirstName = 'Henri';
 let userLastName  = "Bergson";</code>
       </pre>
 
@@ -101,28 +106,34 @@ let userLastName  = "Bergson";</code>
       </p>
 
       <pre>
-<code class="php">$userFullName  = 
+<code class="php">/* PHP */
+$userFullName  = 
   "{$userFirstName} {$userLastName}";</code>
-<code class="js">let userFullName  = 
+<code class="js">/* JavaScript */
+let userFullName  = 
   `${userFirstName} ${userLastName}`;</code>
       </pre>
 
       <p>Also useful to manage simple and double quotes in the same string.</p>
 
       <pre>
-<code class="php">$standardSQL = <<<"HEREDOC"
+<code class="php">/* PHP */
+$standardSQL = <<<"HEREDOC"
   SELECT "firstName" FROM "users" 
   WHERE "lastName" = 'Bergson';
 HEREDOC;</code>
-<code class="js">let HTMLTemplate = 
+<code class="js">/* JavaScript */
+let HTMLTemplate = 
   `&lt;p class="content"&gt;I'm Henri !&lt;/p&gt;`;</code>
       </pre>
 
       <p>Prefer the backticks syntax over concatenation, as it's confusing with additions.</p>
 
       <pre>
-<code class="php">$userFirstName . ' ' . $userLastName;</code>
-<code class="js">userFirstName + ' ' + userLastName;</code>
+<code class="php">/* PHP */
+$userFirstName . ' ' . $userLastName;</code>
+<code class="js">/* JavaScript */
+userFirstName + ' ' + userLastName;</code>
       </pre>
 
       <h3>Data lists</h3>
@@ -130,12 +141,14 @@ HEREDOC;</code>
       <p>Arrays are only for numerically indexed lists in JavaScript. When copied, they are passed by reference.</p>
 
       <pre>
-<code class="php">$userBooks = ['Book 1', 'Book 2'];
+<code class="php">/* PHP */
+$userBooks = ['Book 1', 'Book 2'];
 $userBooks[0];
 count($userBooks);
 $userBooks[] = 'Book 3';
 </code>
-<code class="js">let userBooks = ['Book 1', 'Book 2'];
+<code class="js">/* JavaScript */
+let userBooks = ['Book 1', 'Book 2'];
 userBooks[0];
 userBooks.length;
 userBooks.push('Book 3');</code>
@@ -144,13 +157,15 @@ userBooks.push('Book 3');</code>
       <p>Associative arrays are called objects in JavaScript.</p>
 
       <pre>
-<code class="php">$user = [
+<code class="php">/* PHP */
+$user = [
   'firstName' => 'Henri', 
   'lastName' => 'Bergson'
 ];
 $user['firstName'];
 </code>
-<code class="js">let user = {
+<code class="js">/* JavaScript */
+let user = {
   firstName: 'Henri', 
   lastName: 'Bergson'
 };
@@ -163,17 +178,21 @@ user.firstName;
       <p>Space is required in <code class="js">else if</code> in JavaScript.</p>
 
       <pre>
-<code class="php">if ($userAge > 18) {}
+<code class="php">/* PHP */
+if ($userAge > 18) {}
 elseif ($userAge > 21) {}</code>
-<code class="js">if (userAge > 18) {}
+<code class="js">/* JavaScript */
+if (userAge > 18) {}
 else if (userAge > 21) {}</code>
       </pre>
 
       <p>Like in PHP, be careful with falsy values.</p>
 
       <pre>
-<code class="php">$myData = $myData ?: 'default';</code>
-<code class="js">let myData = myData || 'default';</code>
+<code class="php">/* PHP */
+$myData = $myData ?: 'default';</code>
+<code class="js">/* JavaScript */
+let myData = myData || 'default';</code>
       </pre>
 
       <p>In JavaScript, <code class="js">switch</code> cases are strict comparisons.</p>
@@ -182,9 +201,11 @@ else if (userAge > 21) {}</code>
       variables are block-scoped.</p>
 
       <pre>
-<code class="php">for ($i = 0; $i < 10; $i++) {}
+<code class="php">/* PHP */
+for ($i = 0; $i < 10; $i++) {}
 $i; // 10, error prone</code>
-<code class="js">for (let i = 0; i < 10; i++) {}
+<code class="js">/* JavaScript */
+for (let i = 0; i < 10; i++) {}
 i; // undefined</code>
       </pre>
 
@@ -192,8 +213,10 @@ i; // undefined</code>
       is simplified since ES6.</p>
 
       <pre>
-<code class="php">foreach ($userBooks as $value) {}</code>
-<code class="js">for (let value of userBooks) {}</code>
+<code class="php">/* PHP */
+foreach ($userBooks as $value) {}</code>
+<code class="js">/* JavaScript */
+for (let value of userBooks) {}</code>
       </pre>
 
       <p>Another option for 
@@ -201,8 +224,10 @@ i; // undefined</code>
         (only for arrays).</p>
 
       <pre>
-<code class="php">foreach ($userBooks as $key => $value) {}</code>
-<code class="js">userBooks.foreach(function (value, index) {});</code>
+<code class="php">/* PHP */
+foreach ($userBooks as $key => $value) {}</code>
+<code class="js">/* JavaScript */
+userBooks.foreach(function (value, index) {});</code>
       </pre>
 
       <h3>Functions</h3>
@@ -210,11 +235,13 @@ i; // undefined</code>
       <p>In JavaScript, you can access parent scopes directly.</p>
 
       <pre>
-<code class="php">$myData = 'php';
+<code class="php">/* PHP */
+$myData = 'php';
 function myMethod() {
   $myData; // null
 }</code>
-<code class="js">let myData = 'js';
+<code class="js">/* JavaScript */
+let myData = 'js';
 function myMethod() {
   myData; // 'js'
 }</code>
@@ -224,11 +251,13 @@ function myMethod() {
         <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters" target="_blank">default values</a>.</p>
 
       <pre>
-<code class="php">function myMethod
+<code class="php">/* PHP */
+function myMethod
   ($required, $optional = 'default') {}
 myMethod(); // Error
 </code>
-<code class="js">function myMethod
+<code class="js">/* JavaScript */
+function myMethod
   (optional1, optional2 = 'default') {}
 myMethod(); // OK</code>
       </pre>
@@ -239,8 +268,10 @@ myMethod(); // OK</code>
       </p>
 
       <pre>
-<code class="php">function myMethod($required) {}</code>
-<code class="js">function myMethod(required) {
+<code class="php">/* PHP */
+function myMethod($required) {}</code>
+<code class="js">/* JavaScript */
+function myMethod(required) {
   if (required == null) { return; }
 }</code>
       </pre>
@@ -249,10 +280,12 @@ myMethod(); // OK</code>
         <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank">arrow functions</a>.</p>
 
       <pre>
-<code class="php">array_map(function ($value) {
+<code class="php">/* PHP */
+array_map(function ($value) {
   return $value * 2;
 }, $numbersList);</code>
-<code class="js">numbersList.map(value => value * 2);</code>
+<code class="js">/* JavaScript */
+numbersList.map(value => value * 2);</code>
       </pre>
 
       <h3>Built-in functions</h3>
@@ -260,7 +293,8 @@ myMethod(); // OK</code>
       <p>All functions are methods in JavaScript, and so are called from an object.</p>
 
       <pre>
-<code class="php">mb_strpos($myEmail, '@');
+<code class="php">/* PHP */
+mb_strpos($myEmail, '@');
 str_replace('@', '[at]', $myEmail);
 mb_substr($myEmail, 0, 5);
 mb_strlen($myEmail);
@@ -271,7 +305,8 @@ time();
 var_dump($varToDebug);
 json_encode($user);
 json_decode('{}');</code>
-<code class="js">myEmail.indexOf('@');
+<code class="js">/* JavaScript */
+myEmail.indexOf('@');
 myEmail.replace('@', '[at]');
 myEmail.substr(0, 5);
 myEmail.length;
@@ -296,7 +331,8 @@ try { JSON.parse('{}'); } catch (error) {}</code>
         Pre-declared properties may appear in future JavaScript versions.</p>
 
       <pre>
-<code class="php">class User {
+<code class="php">/* PHP */
+class User {
   public $firstName;
   public function __construct($firstName) {
     $this->firstName = $firstName;
@@ -307,7 +343,8 @@ try { JSON.parse('{}'); } catch (error) {}</code>
 $myUser = new User('Henri');
 $myUser->firstName;
 $myUser->sayHello();</code>
-<code class="js">class User {
+<code class="js">/* JavaScript */
+class User {
 
   constructor(firstName) {
     this.firstName = firstName;
@@ -323,7 +360,8 @@ myUser.sayHello();</code>
       <p>In JavaScript inheritance, parent call is <b>required</b> in the child constructor.</p>
 
       <pre>
-<code class="php">class Editor extends User {
+<code class="php">/* PHP */
+class Editor extends User {
   public function __construct($firstName) {
     parent::__construct($firstName);
   }
@@ -331,7 +369,8 @@ myUser.sayHello();</code>
     parent::sayHello();
   }
 }</code>
-<code class="js">class Editor extends User {
+<code class="js">/* JavaScript */
+class Editor extends User {
   constructor(firstName) {
     super(firstName);
   }
@@ -344,7 +383,8 @@ myUser.sayHello();</code>
       <p>Getters and setters have a special syntax in JavaScript (but you can do classic accessors too).</p>
 
       <pre>
-<code class="php">class User {
+<code class="php">/* PHP */
+class User {
   private $firstName;
   public function getFirstName() {
     return $this->firstName;
@@ -357,7 +397,8 @@ myUser.sayHello();</code>
 $myUser = new User('Henri');
 $myUser->getFirstName();
 $myUser->setFirstName('New name');</code>
-<code class="js">class User {
+<code class="js">/* JavaScript */
+class User {
 
   get firstName() {
     return this._firstName;
@@ -375,12 +416,14 @@ myUser.firstName = 'New name';</code>
       <p>No specific syntax in JavaScript for static methods access.</p>
 
       <pre>
-<code class="php">class Utilities {
+<code class="php">/* PHP */
+class Utilities {
   public static function filter() {}
 }
 
 Utilities::filter();</code>
-<code class="js">class Utilities {
+<code class="js">/* JavaScript */
+class Utilities {
   static filter() {}
 }
 
@@ -399,7 +442,8 @@ Utilities.filter();</code>
         then you are not anymore in the global scope.</p>
 
       <pre>
-<code class="php">// module.php
+<code class="php">/* PHP */
+// module.php
 namespace Symfony\Accounts;
 
 class User {}
@@ -408,7 +452,8 @@ class User {}
 use Symfony\User\User;
 
 $myUser = new User();</code>
-<code class="js">// module.js
+<code class="js">/* JavaScript */
+// module.js
 
 
 export class User {}

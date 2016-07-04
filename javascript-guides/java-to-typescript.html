@@ -10,9 +10,14 @@
     <link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" href="../stylesheets/highlight-default-9.5.0.min.css">
     <style>
-        pre {
+        .main-content pre {
             display: flex;
             justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .main-content pre>code {
+            white-space: pre-wrap;
         }
     </style>
   </head>
@@ -28,7 +33,7 @@
 
       <article>
 
-      <p>This guide presents a comparison of the basic syntax from Java (left side) to JavaScript / TypeScript (right side). 
+      <p>This guide presents a comparison of the basic syntax from Java to JavaScript / TypeScript. 
         Be aware this guide just <i>compare</i> languages, it does <i>not</i> explain the features 
         (you'll find links to official documentation).
         A general explanation of the purpose of this page is available <a href="./" title="General explanation of the purpose of this page and other guides">here</a>, also with other guides.</p>
@@ -62,18 +67,22 @@
           <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" target="_blank"><code class="js">let</code> keyword</a>.</p>
       
       <pre>
-        <code class="java">String myData = "java";
-myData = "new value"; // Error</code>
-        <code class="ts">let myData = "js";
-myData = "new value"; // OK</code>
+        <code class="java">/* Java */
+String myData = "java";
+myData = "new"; // Error</code>
+        <code class="ts">/* JavaScript */
+let myData = "js";
+myData = "new"; // OK</code>
       </pre>
 
       <p>ES6 introduced global <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const" target="_blank">constants</a> 
       in JavaScript. Complex values can be used and therefore manipulated.</p>
       
       <pre>
-<code class="java">final String MY_DATA = "java";</code>
-<code class="ts">const MY_DATA = "js";
+<code class="java">/* Java */
+final String MY_DATA = "java";</code>
+<code class="ts">/* JavaScript */
+const MY_DATA = "js";
 const MY_USER = new User(); // OK
 MY_USER.name = "New name";</code>
       </pre>
@@ -86,11 +95,13 @@ MY_USER.name = "New name";</code>
         All numbers share the same type in JavaScript.</p>
       
       <pre>
-<code class="java">boolean userMan = true;
+<code class="java">/* Java */
+boolean userMan = true;
 int userAge = 81;
 float userAverage = 10.5;
 String userName = "Henri Bergson";</code>
-<code class="ts">let userMan: boolean = true;
+<code class="ts">/* TypeScript */
+let userMan: boolean = true;
 let userAge: number = 81;
 let userAverage: number = 10.5;
 let userName: string = "Henri Bergson";</code>
@@ -108,16 +119,19 @@ let userName: string = "Henri Bergson";</code>
       </p>
 
       <pre>
-<code class="java">String userFullName  = 
+<code class="java">/* Java */
+String userFullName  = 
   userFirstName + " " + userLastName;</code>
-<code class="ts">let userFullName: string = 
+<code class="ts">/* JavaScript (except type) */
+let userFullName: string = 
   `${userFirstName} ${userLastName}`;</code>
       </pre>
 
       <p>Also useful to manage simple and double quotes in the same string.</p>
 
       <pre>
-<code class="ts">let HTMLTemplate: string = `&lt;p class="content"&gt;I'm Henri !&lt;/p&gt;`;</code>
+<code class="ts">/* JavaScript (except type) */
+let HTMLTemplate: string = `&lt;p class="content"&gt;I'm Henri !&lt;/p&gt;`;</code>
       </pre>
 
       <h3>Data lists</h3>
@@ -125,12 +139,14 @@ let userName: string = "Henri Bergson";</code>
       <p>Size of arrays is always dynamic in JavaScript.</p>
 
       <pre>
-<code class="java">List&lt;String&gt; userBooks = 
+<code class="java">/* Java */
+List&lt;String&gt; userBooks = 
   new ArrayList&lt;&gt;();
 userBooks.add("Book 1");
 userBooks.get(0);
 userBooks.size();</code>
-<code class="ts">let userBooks: string[] = 
+<code class="ts">/* JavaScript (except type) */
+let userBooks: string[] = 
   ["Book 1", "Book 2"];
 userBooks.push("Book 3");
 userBooks[0];
@@ -140,12 +156,14 @@ userBooks.length;</code>
       <p>Hash maps are called objects in JavaScript, with string keys.</p>
 
       <pre>
-<code class="java">Map&lt;String, String&gt; user = 
+<code class="java">/* Java */
+Map&lt;String, String&gt; user = 
   new HashMap&lt;&gt;();
 user.put("firstName", "Henri");
 user.put("lastName", "Bergson");
 user.get("firstName");</code>
-<code class="ts">let user = {
+<code class="ts">/* JavaScript */
+let user = {
   firstName: "Henri", 
   lastName: "Bergson"
 };
@@ -155,7 +173,8 @@ user.firstName;</code>
       <p>As a JavaScript object is like a literal instance, you can use TypeScript interfaces as its type.</p>
 
       <pre>
-<code class="ts">interface User {
+<code class="ts">/* TypeScript */
+interface User {
   age: number;
   name: { first: string, last: string };
 }
@@ -181,8 +200,10 @@ let user: User = {
       <p>Since ES6, thanks to <code class="js">let</code>, variables are block-scoped.</p>
 
       <pre>
-<code class="java">for (int i = 0; i < 10; i++) {}</code>
-<code class="ts">for (var i: number = 0; i < 10; i++) {}
+<code class="java">/* Java */
+for (int i = 0; i < 10; i++) {}</code>
+<code class="ts">/* JavaScript (except types) */
+for (var i: number = 0; i < 10; i++) {}
 i; // 10, error prone
 
 for (let i: number = 0; i < 10; i++) {}
@@ -194,18 +215,22 @@ i; // undefined</code>
         Do not indicate the type of <code class="ts">value</code> in TypeScript (it's automatically inferred).</p>
 
       <pre>
-<code class="java">for (String value: userBooks) {}</code>
-<code class="ts">for (let value of userBooks) {}</code>
+<code class="java">/* Java */
+for (String value: userBooks) {}</code>
+<code class="ts">/* JavaScript */
+for (let value of userBooks) {}</code>
       </pre>
 
       <p>Another option for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach" target="_blank">complex iterations</a> 
       (with values <i>and</i> keys, only for arrays).</p>
 
       <pre>
-<code class="java">for (int i = 0; i < books.size(); i++) {
+<code class="java">/* Java */
+for (int i = 0; i < books.size(); i++) {
     books.get(i);
 }</code>
-<code class="ts">books.foreach(
+<code class="ts">/* JavaScript (except types) */
+books.foreach(
   function (value: string, index: number) {});</code>
       </pre>
 
@@ -214,11 +239,13 @@ i; // undefined</code>
       <p>In JavaScript, you can access parent scopes directly.</p>
 
       <pre>
-<code class="java">String myData = "java";
+<code class="java">/* Java */
+String myData = "java";
 void myMethod() {
   myData; // error
 }</code>
-<code class="ts">let myData: string = "js";
+<code class="ts">/* JavaScript (except types) */
+let myData: string = "js";
 function myMethod(): void {
   myData; // "js"
 }</code>
@@ -232,12 +259,14 @@ function myMethod(): void {
       </p>
 
       <pre>
-<code class="java">void myMethod(String required) {
+<code class="java">/* Java */
+void myMethod(String required) {
   myMethod(required, "default");
 }
 void myMethod
   (String required, String optional) {}</code>
-<code class="ts">function myMethod
+<code class="ts">/* JavaScript  (except types) */
+function myMethod
   (required: string, 
     optional: string = "default"): void {}</code>
       </pre>
@@ -246,9 +275,11 @@ void myMethod
         <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank">arrow functions</a>.</p>
 
       <pre>
-<code class="java">numbersList.stream
+<code class="java">/* Java */
+numbersList.stream
   .filter(value -> value > 2);</code>
-<code class="ts">numbersList
+<code class="ts">/* JavaScript (except type) */
+numbersList
   .filter((value: number) => value > 2);</code>
       </pre>
 
@@ -257,12 +288,14 @@ void myMethod
       <p>Some basic methods. Note that <code class="ts">length</code> is a property (not a method) in JavaScript.</p>
 
       <pre>
-<code class="java">myEmail.indexOf("@");
+<code class="java">/* Java */
+myEmail.indexOf("@");
 myEmail.replaceAll("(.*)@(.*)", " at ");
 myEmail.substring(0, 5);
 myEmail.length();
 Integer.parseInt("10");</code>
-<code class="ts">myEmail.strpos("@");
+<code class="ts">/* JavaScript */
+myEmail.strpos("@");
 myEmail.replace("@", " at ");
 myEmail.substring(0, 5);
 myEmail.length;
@@ -283,7 +316,8 @@ parseInt("10");</code>
         <a href="http://www.typescriptlang.org/docs/handbook/classes.html" target="_blank">TypeScript allows them right now</a>.</p>
 
       <pre>
-<code class="java">public class User {
+<code class="java">/* Java */
+public class User {
   public String firstName;
   public User(String firstName) {
     this.firstName = firstName;
@@ -294,7 +328,8 @@ parseInt("10");</code>
 User myUser = new User("Henri");
 myUser.firstName;
 myUser.sayHello();</code>
-<code class="ts">class User {
+<code class="ts">/* JavaScript + TypeScript */
+class User {
   public firstName: string;
   public constructor(firstName: string) {
     this.firstName = firstName;
@@ -310,7 +345,8 @@ myUser.sayHello();</code>
       <p>In JavaScript inheritance, parent call is <b>required</b> in the child constructor.</p>
 
       <pre>
-<code class="java">public class Editor extends User {
+<code class="java">/* Java */
+public class Editor extends User {
   public Editor(String firstName) {
     super(firstName);
   }
@@ -318,11 +354,12 @@ myUser.sayHello();</code>
     super.sayHello();
   }
 }</code>
-<code class="ts">class Editor extends User {
+<code class="ts">/* JavaScript (except types) */
+class Editor extends User {
   public constructor(firstName: string) {
     super(firstName);
   }
-  publix sayHello(): void {
+  public sayHello(): void {
     super.sayHello();
   }
 }</code>
@@ -332,7 +369,8 @@ myUser.sayHello();</code>
           Do not pre-declared the property, it is done internally.</p>
 
       <pre>
-<code class="java">public class User {
+<code class="java">/* Java */
+public class User {
   protected String name;
   public String getName() {
     return this.name;
@@ -345,7 +383,8 @@ myUser.sayHello();</code>
 User myUser = new User("Henri");
 myUser.getName();
 myUser.setName("New name");</code>
-<code class="ts">class User {
+<code class="ts">/* JavaScript (except types) */
+class User {
   protected _name: string;
   public get name(): string {
     return this._name;
@@ -363,8 +402,9 @@ myUser.name = "New name";</code>
       <p>Same syntax for static methods in JavaScript.</p>
 
       <pre>
-<code class="ts">class Utilities {
-  static filter() {}
+<code class="ts">/* JavaScript (except type) */
+class Utilities {
+  static filter(): void {}
 }
 
 Utilities.filter();</code>
@@ -374,7 +414,8 @@ Utilities.filter();</code>
         <a href="http://www.typescriptlang.org/docs/handbook/interfaces.html" target="_blank">interfaces</a>.</p>
 
       <pre>
-<code class="java">public interface Movable {
+<code class="java">/* Java */
+public interface Movable {
   public void move();
 }
 
@@ -383,7 +424,8 @@ public class Vehicle implements Movable {
 }
 
 public abstract class Test {}</code>
-<code class="ts">interface Movable {
+<code class="ts">/* TypeScript */
+interface Movable {
   public move(): void;
 }
 
@@ -405,7 +447,8 @@ abstract class Test {}</code>
         it's better to configure the loader to automatically add the right extension.</p>
 
       <pre>
-<code class="java">// User.java
+<code class="java">/* Java */
+// User.java
 package accounts;
 
 public class User {}
@@ -414,7 +457,8 @@ public class User {}
 import accounts.User;
 
 User myUser = new User();</code>
-<code class="ts">// User.ts
+<code class="ts">/* JavaScript (except type) */
+// User.ts
 
 
 export class User {}
