@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>HTML5 CSS3 essentials for JavaScript guide by Cyrille Tuzi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="../stylesheets/highlight-default-9.5.0.min.css">
+    <style>
+        pre {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+  </head>
+  <body>
+
+    <header class="page-header">
+      <h1 class="project-name">HTML5 CSS3 essentials for JavaScript</h1>
+    </header>
+
+    <div class="main-content">
+
+      <main>
+
+      <article>
+
+        <p>To create a web app, with frameworks (like 
+            <a href="https://angular.io" target="_blank">Angular 2</a> or 
+            <a href="https://facebook.github.io/react/" target="_blank">React</a>) 
+            or soon natively (with the <a href="http://webcomponents.org" target="_blank">Web Components</a> standard), 
+            you'll develop components : you'll write JavaScript for the behavior, but without a view, 
+            your component is worthless. And here come HTML and CSS.</p>
+
+        <p>Yeah, I know : you work with complex frameworks like Symfony or "serious" languages like Java, 
+            so you're smart enough to understand what is a tag and how to put a text in red. Well, 
+            that's not enough. Quick-and-dirty HTML leads to poor search engine optimization, bad ergonomy 
+            and no accessibility, and something is clearly not easy : CSS positionning. 
+            There is 3 major pitfalls you won't guess by magic.</p>
+
+        <p>So please do yourself and others a favor : put aside your pride for a few minutes 
+            to learn solid and clean basics in HTML5 CSS3.</p>
+
+        <p>Be aware this guide does <i>not</i> explain all the features in details, 
+        it is not appropriate to programming beginners.
+        A general explanation of the purpose of this page is available <a href="./" title="General explanation of the purpose of this page and other guides">here</a>, also with other guides.</p>
+
+      <h2>HTML5 essentials</h2>
+      
+      <h3>Doctype</h3>
+
+      <p><b>Always</b> start your HTML page with this document type, and <b>only this one</b>. 
+      There are consequences for JavaScript too. <b><i>No exception</i></b>.</p>
+      
+      <pre><code class="html">&lt;!doctype html&gt;</code></pre>
+
+      <h3>Encoding</h3>
+
+      <p><b>Always</b> work in UTF-8. Some modern tools, including JSON (JavaScript Object Notation, 
+      which replaces XML in most web services), only work in UTF-8.</p>
+      
+      <pre><code class="html">&lt;meta charset="utf-8"&gt;</code></pre>
+
+      <h3>Structure</h3>
+
+      <p>You need to build a solid structure, to be able to position elements in CSS and to manipulate them in JavaScript. 
+          Regroup in blocks what belong together as much as you can, 
+          especially blocks aligned horizontally (it will be important for CSS). 
+          Think of it as scopes / encapsulation. Name your blocks with an id if it's unique, 
+          or add it to class (group) if there is some repitition. <b>Forget tables</b>.</p>
+      
+      <pre><code class="html">&lt;!-- Bad structure --&gt;
+&lt;div&gt;Logo on left&lt;/div&gt;
+&lt;div&gt;Menu on right&lt;/div&gt;
+&lt;div&gt;Content 1&lt;/div&gt;
+&lt;div&gt;Content 2&lt;/div&gt;
+&lt;div&gt;Sidebar&lt;/div&gt;
+&lt;div&gt;Footer&lt;/div&gt;</code>
+
+<code class="html">&lt;!-- Good structure --&gt;
+&lt;div id="wrapper-global"&gt;
+  &lt;div id="header"&gt;
+    &lt;div id="header-logo"&gt;Logo on left&lt;/div&gt;
+    &lt;div id="header-nav"&gt;Menu on right&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div id="wrapper-main"&gt;
+    &lt;div id="content"&gt;
+      &lt;div class="story"&gt;Content 1&lt;/div&gt;
+      &lt;div class="story"&gt;Content 2&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id="sidebar"&gt;Sidebar&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div id="footer"&gt;Footer&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <p>HTML5 added new blocks with semantic, for search engine optimization and accessibility.</p>
+
+        <pre><code class="html">&lt;div id="wrapper-global"&gt;
+  &lt;header id="header"&gt;
+    &lt;div id="header-logo"&gt;Logo on left&lt;/div&gt;
+    &lt;nav id="header-nav"&gt;Menu on right&lt;/nav&gt;
+  &lt;/header&gt;
+  &lt;div id="wrapper-main"&gt;
+    &lt;main id="content"&gt;
+      &lt;article class="story"&gt;Content 1&lt;/article&gt;
+      &lt;article class="story"&gt;Content 2&lt;/article&gt;
+    &lt;/main&gt;
+    &lt;aside id="sidebar"&gt;Sidebar&lt;/aside&gt;
+  &lt;/div&gt;
+  &lt;footer id="footer"&gt;Footer&lt;/footer&gt;
+&lt;/div&gt;</code></pre>
+
+      <h3>Medias</h3>
+
+      <p>Do not forget an alternative text for images (for accessibility) and dimensions are the only
+          exception of graphic informations in HTML (for performance). Prefer SVG when possible, 
+          or PNG, and JPEG only for high quality pictures, but with compression.</p>
+
+      <pre><code class="html">&lt;img src="image.png" alt="Description" width="500" height="300"&gt;</code></pre>
+
+      <p>Control bar in videos is not automatic, you must ask for it. 
+          Choose appropriate codecs for encoding (MPEG H.264 video / MP3 audio). Tag must be closed.</p>
+
+      <pre><code class="html">&lt;video controls src="video.mp4" width="500" height="300"&gt;&lt;/video&gt;</code></pre>
+
+      <h3>Links</h3>
+
+      <pre><code class="html">&lt;a href="https://developer.mozilla.org" target="_blank"&gt;Explicit text&lt;/a&gt;</code></pre>
+
+      <h3>Semantics</h3>
+
+      <p><b>Every</b> content (text, images, links...) must be prioritized with one of the following semantic blocks.
+        It will be important for CSS positionning.</p>
+      
+      <pre><code class="html">&lt;h1&gt;Page title&lt;/h1&gt;
+&lt;h2&gt;Subtitles&lt;/h2&gt;
+&lt;h3&gt;Subtitles&lt;/h3&gt;
+&lt;p&gt;Normal text content&lt;/p&gt;
+&lt;figure&gt;Illustrative content (like an image)&lt;/figure&gt;
+&lt;ul&gt;
+  &lt;li&gt;List&lt;/li&gt;
+  &lt;li&gt;List&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+      <p><b>Then</b>, and only then, you can give importance to some words for search engine optimization.</p>
+      
+      <pre><code class="html">&lt;p&gt;Hello world ! This page is about &lt;strong&gt;keyword&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Emphasised introduction...&lt;/em&gt;&lt;/p&gt;</code></pre>
+
+      <p>Some common errors.</p>
+
+      <pre><code class="html">&lt;!-- Bad semantics --&gt;
+&lt;a href="https://developer.mozilla.org"&gt;Explicit text&lt;/a&gt;
+&lt;img src="image.png" alt="Description" width="500" height="300"&gt;
+&lt;div&gt;Normal text content&lt;/div&gt;
+&lt;span&gt;Normal text content&lt;/span&gt;
+
+&lt;!-- Good semantics --&gt;
+&lt;p&gt;&lt;a href="https://developer.mozilla.org"&gt;Explicit text&lt;/a&gt;&lt;/p&gt;
+&lt;figure&gt;&lt;img src="image.png" alt="Description" width="500" height="300"&gt;&lt;/figure&gt;
+&lt;div&gt;&lt;p&gt;Normal text content&lt;/p&gt;&lt;/div&gt;
+&lt;p&gt;Normal text content&lt;/p&gt;</code>
+        </pre>
+
+      <p>Be aware of 3 special characters : &lt;, &gt;, &amp;.</p>
+
+      <pre><code class="html">&amp;lt;
+&amp;gt;
+&amp;amp;</code></pre>
+
+      <h3>Forms</h3>
+
+      <p>Forms are where you ask users to interact. So it's where ergonomy and accessibility must be perfect. 
+        For example, each input needs a linked label. Also use the new input types.</p>
+
+      <p>Input names will be used by the server, do not confuse with id.</p>
+
+      <pre><code class="html">&lt;form method="post" action="signup.php"&gt;
+
+  &lt;label for="signup-email"&gt;E-mail (required) :&lt;/label&gt;
+  &lt;input type="email" name="email" id="signup-email" required&gt;
+
+  &lt;label for="signup-password"&gt;Password (required) :&lt;/label&gt;
+  &lt;input type="password" name="password" id="signup-password" required&gt;
+
+  &lt;label for="signup-nickname"&gt;Nickname :&lt;/label&gt;
+  &lt;input type="text" name="nickname" id="signup-nickname" maxlength="250"&gt;
+
+  &lt;label for="signup-phone"&gt;Phone :&lt;/label&gt;
+  &lt;input type="tel" name="phone" id="signup-phone" pattern="[0-9 \+\-\.]+"&gt;
+
+  &lt;label for="signup-website"&gt;Website :&lt;/label&gt;
+  &lt;input type="url" name="website" id="signup-website"&gt;
+
+  &lt;label for="signup-birthdate"&gt;Birthdate :&lt;/label&gt;
+  &lt;input type="date" name="birthdate" id="signup-birthdate"&gt;
+
+  &lt;fieldset&gt;
+    &lt;legend&gt;Gender :&lt;/legend&gt;
+    &lt;input type="radio" name="gender" id="signup-gender-n" value="n" checked&gt;
+    &lt;label for="signup-gender-n"&gt;Not specified&lt;/label&gt;
+    &lt;input type="radio" name="gender" id="signup-gender-w" value="w"&gt;
+    &lt;label for="signup-gender-w"&gt;Woman&lt;/label&gt;
+    &lt;input type="radio" name="gender" id="signup-gender-m" value="m"&gt;
+    &lt;label for="signup-gender-m"&gt;Man&lt;/label&gt;
+  &lt;/fieldset>
+
+  &lt;label for="signup-country"&gt;Country :&lt;/label&gt;
+  &lt;select name="country" id="signup-country"&gt;
+    &lt;option value="ca"&gt;Canada&lt;/option&gt;
+    &lt;option value="fr" selected&gt;France&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;label for="signup-description"&gt;Description :&lt;/label&gt;
+  &lt;textarea name="description" id="signup-description"&gt;&lt;/textarea&gt;
+
+  &lt;input type="checkbox" name="conditions" id="signup-conditions" required&gt;
+  &lt;label for="signup-conditions"&gt;I accept general conditions.&lt;/label&gt;.
+
+  &lt;button type="submit"&gt;Sign up&lt;/button&gt;
+
+&lt;/form&gt;
+
+&lt;form method="get" action="search.php"&gt;
+
+  &lt;label for="search-email"&gt;Search :&lt;/label&gt;
+  &lt;input type="search" name="search" id="search-input" placeholder="some keyword..."&gt;
+
+  &lt;button type="submit"&gt;Search&lt;/button&gt;
+
+&lt;/form&gt;</code></pre>
+
+      <p><b>Respect HTTP methods</b> or it will lead to security issues. Choose <code>get</code> for 
+      read operations (search...) and 
+      <code>post</code> for modification operations (signup, signin, back-office...).</p>
+
+      <p>Do not rely on any HTML or JavaScript validation : we're on the client side, which <b>cannot</b> 
+      be secure. New HTML5 attributes are just here for ergonomy, you <b>must</b> check again on the server side.</p>
+
+      <h3>HTML validation</h3>
+
+      <p>You would not push your Java or PHP code in production without any testing, right ? Well, please  
+          keep a good methodology for HTML too. Displaying your page in a browser is not enough : you'll 
+          just see visual problems (i.e. mostly CSS problems) but not HTML problems (like a broken tree because 
+          of a missing closing tag). <b>You'll manipulate this structure in JavaScript, so do not expect 
+          it goes well if the structure is weak or broken.</b></p>
+
+      <p>So use the <a href="http://validator.w3.org" target="_blank">W3C HTML validator</a> 
+      <b>before</b> continuing. Some frameworks like Angular 2 will check this for you.</p>
+
+      <h2>CSS3 essentials</h2>
+
+      <h3>Selectors</h3>
+
+      <p>Any element can be named by one id and/or several classes.</p>
+
+      <pre><code class="html">&lt;h1 id="page-title" class="title color-main"&gt;Page title&lt;/h1&gt;</code></pre>
+
+      <p>You can group blocks with <code class="html">&lt;div&gt;</code> like already done in the HTML structure step,
+      and you can also group part of a content. But as seen before, <code class="html">&lt;span&gt;</code> alone has 
+      no semantic meaning.</p>
+
+      <pre><code class="html">&lt;p&gt;Some &lt;span class="color-main"&gt;content&lt;/span&gt;...&lt;/p&gt;</code></pre>
+
+      <p>Now we can select anything in the page to style them in CSS, but <b>you'll also use 
+          the same selectors in JavaScript</b> to manipulate elements.</p>
+
+      <pre><code class="css">h1 {}
+.title {}
+#page-title {}</code></pre>
+
+      <p>Factoring.</p>
+
+      <pre><code class="css">h1,
+h2 {}</code></pre>
+
+      <p>Tree-based selectors. As you can see, a space has a meaning in CSS selectors, so do <b>not</b> 
+      put unnecessary spaces, it will lead to wrong selectors.</p>
+
+      <pre><code class="css">&lt;!-- All descendants (elements of the list and any sublists) --&gt;
+#header-nav-list li {}
+&lt;!-- Children only (elements of this list only) --&gt;
+#header-nav-list>li {}</code></pre>
+
+      <p>Attribute selector.</p>
+
+      <pre><code class="css">input[type="text"] {}</code></pre>
+
+      <p>Pseudo-classes : understand them as conditions / filters.</p>
+
+      <pre><code class="css">a:hover {}
+#header-nav-list>li:first-child {}</code></pre>
+
+      <h3>Selectors priority (CSS pitfall n°1)</h3>
+
+      <p>For different selectors, the priority is not about order (either in HTML or in CSS) 
+        but <b>specificity</b>. So : <code class="css">#id</code> > <code class="css">.class</code> > <code class="css">tag</code>. 
+          If the priority is the same, the last selector wins (cascading).</p>
+
+      <p>If you do your CSS in a clever way and order, you should not have too much troubles. If any, 
+        use the Inspector development tool in your browser.</p>
+
+      <pre><code class="css">/* 1. General graphics */
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.color-main {
+  color: rgb(255, 0, 0);
+}
+
+/* 2. Positionning */
+#header {
+  display: flex;
+}</code></pre>
+
+      <p>Do <b>not</b> use <code class="css">!important</code>. Except in very uncommon (and justified) cases,
+        it is a very bad practice as it breaks the cascading system.</p>
+
+      <p><b>Never</b> use inline styles in HTML. They are impossible to override, 
+      and they can be forbidden by a new security option in HTML5 called 
+      <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Using_Content_Security_Policy" target="_blank">Content Security Policy</a>.</p>
+
+      <h3>Graphics</h3>
+
+      <p>You should know 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font" target="_blank">font</a>,
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-align" target="_blank">text-align</a>,
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/list-style" target="_blank">list-style</a>,
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color" target="_blank">color</a>,
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background" target="_blank">background</a>,
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length" target="_blank">units</a> 
+        (<code class="css">em</code> or <code class="css">rem</code> are recommanded).</p>
+
+      <p>CSS3 allows to do advanced graphics with no heavy images to load : 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face" target="_blank">custom fonts</a>, 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face" target="_blank">gradients</a>, 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow" target="_blank">text</a>
+        and <a href="https://developer.mozilla.org/en-US//docs/Web/CSS/box-shadow" target="_blank">box shadows</a>, 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius" target="_blank">border radius</a>...</p>
+
+      <h3>Animations</h3>
+
+      <p>CSS3 introduced 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform" target="_blank">transformations</a> 
+        (rotation, translation...),
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition" target="_blank">transitions</a> 
+        and standalone <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation" target="_blank">animations</a>.
+        It's only for small and visual animations, interaction is still the role of JavaScript. 
+        But especially <b>transitions can help you in JavaScript</b> to simplify animations 
+        (before, we had to do complex recursive timers).</p>
+
+        <p>A transition does nothing by itself : in this example, it only tells : if there is any modification 
+          on <code class="css">margin-left</code>, do it in 5 seconds instead of instantly.</p>
+
+      <pre><code class="css">#some-element {
+  transition: margin-left 5s;        
+}</code></pre>
+
+      <p>In JavaScript, you'll have the <code class="js">transitionend</code> event 
+      to know when the transion is finished.</p>
+
+      <h3>Normalizing and box-sizing (CSS pitfall n°2)</h3>
+
+      <p>Be aware that by default, <code class="css">width</code> and <code class="css">height</code> 
+        are the content dimensions, not the block dimensions. It's the major pitfall in CSS as it's really against-intuitive. 
+        Hopefully that can be changed in CSS3 with <code class="css">box-sizing</code>.</p>
+
+      <p>It's done by <a href="https://github.com/jonathantneal/sanitize.css" target="_blank">sanitize.css</a> library,
+      also with a normalization of default styles accross browsers (especially for new HTML5 tags). 
+      <b>Use it</b>, you'll thank me.</p>
+
+      <h3>Positionning (CSS pitfall n°3)</h3>
+
+      <p>You should know :
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/width" target="_blank">width</a>, 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/height" target="_blank">height</a>, 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/max-width" target="_blank">max-width</a> 
+        (often better for responsive), 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin" target="_blank">margin</a>, 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding" target="_blank">padding</a>,
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border" target="_blank">border</a>,
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/overflow" target="_blank">overflow</a>.
+      </p>
+
+      <p>Be aware you can only give dimensions to block elements : 
+        <code class="html">&lt;div&gt;, &lt;h1&gt;, &lt;h2&gt;, &lt;h3&gt;, &lt;p&gt;, &lt;figure&gt;, 
+          &lt;ul&gt;, &lt;li&gt;, &lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;, &lt;aside&gt;, 
+          &lt;footer&gt;</code>...
+          It's why it was important to prioritize every content in HTML, or you won't have a block to work on it.</p>
+
+      <p>By default, <code class="css">block</code> elements are displayed vertically 
+      and content elements horizontally (<code class="css">inline</code>). It is automatically managed by the 
+      <a href="https://developer.mozilla.org/fr/docs/Web/CSS/display" target="_blank"><code class="css">display</code> property</a>. 
+      Do <b>not</b> touch it and <b>never</b> use the special <code class="css">inline-block</code> option to align blocks horizontally : 
+      it's not the purpose of this value and will lead to troubles.</p>
+
+      <p>To align blocks horizontally, <b>only</b> use the 
+      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" target="_blank">new positionning system</a> 
+      in CSS3 :</p>
+
+      <pre><code class="css">#header {
+  display: flex;
+  /* And some optional alignment if needed */
+  justify-content: space-between;
+  align-items: center;        
+}</code></pre>
+
+      <p>In JavaScript, you'll need to show and hide elements : <b>only</b> use <code class="css">display</code>.</p>
+
+      <pre><code class="css">#popup {
+  display: none; /* Good */
+  visibility: hidden; /* Bad */   
+}</code></pre>
+
+      <h3>Responsive design</h3>
+
+      <p>As there is more traffic on mobile than desktop today, being responsive is <b>required</b>. First,
+      <b>always</b> include this line in HTML head to request a normally scaled display on mobile :</p>
+
+      <pre><code class="html">&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></pre>
+
+      <p>Then you just have to adapt your CSS (dimensions, axis...) with media queries. Here are the common cases :</p>
+
+      <pre><code class="css">/* Default styles for classic screens */
+@media all {
+  #wrapper-global {
+    max-width: 960px; /* Max width recommended on desktop */
+    margin: 0 auto; /* If you need to center you app */
+  }
+}
+        
+/* Tablets in portrait */
+@media all and (min-width: 760px) and (max-width: 959px) {}
+
+/* Mini-tablets in portrait & very good mobiles in landscape */
+@media all and (min-width: 560px) and (max-width: 759px) {}
+
+/* Mobiles in landscape */
+@media all and (min-width: 460px) and (max-width: 559px) {}
+
+/* Mobiles in portrait (common and smallest width is 320px) */
+@media all and (max-width: 459px) {}</code></pre>
+
+      <p>Any interactive item (links...) <b>must</b> be 48x48px minimum with 8px margin minimum.</p>
+
+      <p>You may want to optimize image sources (for performance and quality) with the new 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Img" target="_blank"><code class="html">srcset</code> HTML attribute</a>,
+        and some parts of the page can be adapted in JavaScript with the same 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Testing_media_queries" target="_blank">media queries</a> 
+        (for example a wide menu converted to a select box).</p>
+
+      <h3>JavaScript courses</h3>
+
+      <p>If you're looking for full JavaScript courses in France, check my <a href="https://formationjavascript.com/" target="_blank">training website</a>.</p>
+
+      </article>
+
+      </main>
+
+      <footer class="site-footer">
+        <span class="site-footer-credits">A project by <a href="https://www.cyrilletuzi.com/en/web/" target="_blank">Cyrille Tuzi</a>. This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </div>
+
+    <script src="../scripts/highlight-custom-9.5.0.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+  </body>
+</html>
