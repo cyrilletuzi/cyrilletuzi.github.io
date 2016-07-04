@@ -62,20 +62,20 @@
           <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" target="_blank"><code class="js">let</code> keyword</a>.</p>
       
       <pre>
-        <code class="java">String myData = 'java';
-myData = 'new value'; // Error</code>
-        <code class="ts">let myData = 'js';
-myData = 'new value'; // OK</code>
+        <code class="java">String myData = "java";
+myData = "new value"; // Error</code>
+        <code class="ts">let myData = "js";
+myData = "new value"; // OK</code>
       </pre>
 
       <p>ES6 introduced global <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const" target="_blank">constants</a> 
       in JavaScript. Complex values can be used and therefore manipulated.</p>
       
       <pre>
-<code class="java">final String MY_DATA = 'java';</code>
-<code class="ts">const MY_DATA = 'js';
+<code class="java">final String MY_DATA = "java";</code>
+<code class="ts">const MY_DATA = "js";
 const MY_USER = new User(); // OK
-MY_USER.name = 'New name';</code>
+MY_USER.name = "New name";</code>
       </pre>
 
       <h3>Simple data types</h3>
@@ -89,11 +89,11 @@ MY_USER.name = 'New name';</code>
 <code class="java">boolean userMan = true;
 int userAge = 81;
 float userAverage = 10.5;
-String userName = 'Henri Bergson';</code>
+String userName = "Henri Bergson";</code>
 <code class="ts">let userMan: boolean = true;
 let userAge: number = 81;
 let userAverage: number = 10.5;
-let userName: string = 'Henri Bergson';</code>
+let userName: string = "Henri Bergson";</code>
       </pre>
 
       <p>In addition to <code class="js">null</code>, JavaScript has the <code class="js">undefined</code> type, 
@@ -101,14 +101,15 @@ let userName: string = 'Henri Bergson';</code>
 
       <h3>String details</h3>
 
-      <p>ES6 introduced <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" target="_blank">template literals</a> : 
+      <p>You can use either single or doubles quotes for strings. 
+        ES6 introduced <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" target="_blank">template literals</a> : 
         new backtick quotes for variable interpolation and allowing line breaks.
         Avoid classic concatenation in JavaScript, as it's confusing with additions and will lead to type errors.
       </p>
 
       <pre>
 <code class="java">String userFullName  = 
-  userFirstName + ' ' + userLastName;</code>
+  userFirstName + " " + userLastName;</code>
 <code class="ts">let userFullName: string = 
   `${userFirstName} ${userLastName}`;</code>
       </pre>
@@ -126,12 +127,12 @@ let userName: string = 'Henri Bergson';</code>
       <pre>
 <code class="java">List&lt;String&gt; userBooks = 
   new ArrayList&lt;&gt;();
-userBooks.add('Book 1');
+userBooks.add("Book 1");
 userBooks.get(0);
 userBooks.size();</code>
 <code class="ts">let userBooks: string[] = 
-  ['Book 1', 'Book 2'];
-userBooks.push('Book 3');
+  ["Book 1", "Book 2"];
+userBooks.push("Book 3");
 userBooks[0];
 userBooks.length;</code>
       </pre>
@@ -141,12 +142,12 @@ userBooks.length;</code>
       <pre>
 <code class="java">Map&lt;String, String&gt; user = 
   new HashMap&lt;&gt;();
-user.put('firstName', 'Henri');
-user.put('lastName', 'Bergson');
-user.get('firstName');</code>
+user.put("firstName", "Henri");
+user.put("lastName", "Bergson");
+user.get("firstName");</code>
 <code class="ts">let user = {
-  firstName: 'Henri', 
-  lastName: 'Bergson'
+  firstName: "Henri", 
+  lastName: "Bergson"
 };
 user.firstName;</code>
       </pre>
@@ -161,7 +162,7 @@ user.firstName;</code>
   
 let user: User = {
   age: 81,
-  name: { first: 'Henri', last: 'Bergson' }
+  name: { first: "Henri", last: "Bergson" }
 };</code>
       </pre>
 
@@ -213,17 +214,17 @@ i; // undefined</code>
       <p>In JavaScript, you can access parent scopes directly.</p>
 
       <pre>
-<code class="java">String myData = 'java';
+<code class="java">String myData = "java";
 void myMethod() {
-  myData; // null
+  myData; // error
 }</code>
-<code class="ts">let myData: string = 'js';
+<code class="ts">let myData: string = "js";
 function myMethod(): void {
-  myData; // 'js'
+  myData; // "js"
 }</code>
       </pre>
 
-      <p>No overriding in JavaScript (a function can only have one definition), 
+      <p>No overloading in JavaScript (a function can only have one definition), 
           and parameters are always optional. 
           ES6 introduced <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters" target="_blank">default values</a>.
           TypeScript allow automatic required arguments without manual checking 
@@ -232,13 +233,13 @@ function myMethod(): void {
 
       <pre>
 <code class="java">void myMethod(String required) {
-  myMethod(required, 'default');
+  myMethod(required, "default");
 }
 void myMethod
   (String required, String optional) {}</code>
 <code class="ts">function myMethod
   (required: string, 
-    optional: string = 'default'): void {}</code>
+    optional: string = "default"): void {}</code>
       </pre>
 
       <p>ES6 introduced a shorter anonymous functions syntax, named 
@@ -256,16 +257,16 @@ void myMethod
       <p>Some basic methods. Note that <code class="ts">length</code> is a property (not a method) in JavaScript.</p>
 
       <pre>
-<code class="java">myEmail.strpos('@');
-myEmail.replaceAll('(.*)@(.*)', ' at ');
-myEmail.substr(0, 5);
+<code class="java">myEmail.indexOf("@");
+myEmail.replaceAll("(.*)@(.*)", " at ");
+myEmail.substring(0, 5);
 myEmail.length();
-Integer.parseInt('10');</code>
-<code class="ts">myEmail.strpos('@');
-myEmail.replace('@', ' at ');
-myEmail.substr(0, 5);
+Integer.parseInt("10");</code>
+<code class="ts">myEmail.strpos("@");
+myEmail.replace("@", " at ");
+myEmail.substring(0, 5);
 myEmail.length;
-parseInt('10');</code>
+parseInt("10");</code>
       </pre>
 
       <p>When a function seems to be called directly, like <code class="js">parseInt()</code>, 
@@ -290,7 +291,7 @@ parseInt('10');</code>
   public void sayHello() {}
 }
 
-User myUser = new User('Henri');
+User myUser = new User("Henri");
 myUser.firstName;
 myUser.sayHello();</code>
 <code class="ts">class User {
@@ -301,7 +302,7 @@ myUser.sayHello();</code>
   public sayHello(): void {}
 }
 
-let myUser: User = new User('Henri');
+let myUser: User = new User("Henri");
 myUser.firstName;
 myUser.sayHello();</code>
       </pre>
@@ -341,9 +342,9 @@ myUser.sayHello();</code>
   }
 }
 
-User myUser = new User('Henri');
+User myUser = new User("Henri");
 myUser.getName();
-myUser.setName('New name');</code>
+myUser.setName("New name");</code>
 <code class="ts">class User {
   protected _name: string;
   public get name(): string {
@@ -354,9 +355,9 @@ myUser.setName('New name');</code>
   }
 }
 
-let myUser: User = new User('Henri');
+let myUser: User = new User("Henri");
 myUser.name;
-myUser.name = 'New name';</code>
+myUser.name = "New name";</code>
       </pre>
 
       <p>Same syntax for static methods in JavaScript.</p>
@@ -419,7 +420,7 @@ User myUser = new User();</code>
 export class User {}
 
 // script.ts
-import { User } from './module';
+import { User } from "./module";
 
 let myUser: User = new User();</code>
       </pre>
@@ -434,7 +435,9 @@ let myUser: User = new User();</code>
 
       <footer class="site-footer">
         <span class="site-footer-credits">A project by <a href="https://www.cyrilletuzi.com/en/web/" target="_blank">Cyrille Tuzi</a>. 
-        Thanks to <a href="https://twitter.com/lpenet" target="_blank">Ludovic Penet</a> who checked the Java code.<br>
+        Thanks to <a href="https://twitter.com/lpenet" target="_blank">Ludovic Pénet</a> 
+        and Aurélien Larive
+        who checked the Java code.<br>
         This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
 
