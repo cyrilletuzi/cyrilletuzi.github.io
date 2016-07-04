@@ -143,14 +143,26 @@ userBooks.length;</code>
   new HashMap&lt;String, String&gt;();
 user.put('firstName', 'Henri');
 user.put('lastName', 'Bergson');
-user.get('firstName');
-</code>
+user.get('firstName');</code>
 <code class="ts">let user = {
   firstName: 'Henri', 
   lastName: 'Bergson'
 };
-user.firstName;
-</code>
+user.firstName;</code>
+      </pre>
+
+      <p>As a JavaScript object is like a literal instance, you can use TypeScript interfaces as their type.</p>
+
+      <pre>
+<code class="ts">interface User {
+  age: string;
+  name: { first: string, last: string };
+}
+  
+let user: User = {
+  age: 81,
+  name: { first: 'Henri', last: 'Bergson' }
+};</code>
       </pre>
 
       <p>ES6 introduced new collections : 
