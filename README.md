@@ -6,8 +6,8 @@ So we moved at once from no JavaScript needed to high level JavaScript everywher
 
 So I decided to publish some guides to help learning modern HTML, CSS & JavaScript.
 
-## [HTML5 CSS3 essentials for JavaScript guide](https://cyrilletuzi.github.io/javascript-guides/html-css-essentials.html)
+## [HTML5 CSS3 essentials for JavaScript](https://cyrilletuzi.github.io/javascript-guides/html-css-essentials.html)
 
-## [PHP to JavaScript ES6 guide](https://cyrilletuzi.github.io/javascript-guides/php-to-javascript.html)
+## [PHP to JavaScript ES6](https://cyrilletuzi.github.io/javascript-guides/php-to-javascript.html)
 
-## [Java to JavaScript / TypeScript guide](https://cyrilletuzi.github.io/javascript-guides/java-to-typescript.html)
+## [Java to JavaScript / TypeScript](https://cyrilletuzi.github.io/javascript-guides/java-to-typescript.html)
