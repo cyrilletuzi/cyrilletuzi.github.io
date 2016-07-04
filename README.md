@@ -6,8 +6,8 @@ So we moved at once from no JavaScript needed to high level JavaScript everywher
 
 So I decided to publish some guides to help learning modern HTML, CSS & JavaScript.
 
-Hopefully, JavaScript basics are quite the same as other languages. So I wrote comparison guides to help switching from PHP or Java to JavaScript or TypeScript. Be aware that these guides just compare the languages features, they do not explain them. The current standard of JavaScript, i.e. ES6 (also known as ES2015), is used.
+## [PHP to JavaScript ES6 guide](https://cyrilletuzi.github.io/javascript-guides/php-to-javascript.html)
 
-## [PHP to JavaScript guide](https://cyrilletuzi.github.io/javascript-guides/php-to-javascript.html)
+## [Java to JavaScript / TypeScript guide](https://cyrilletuzi.github.io/javascript-guides/java-to-typescript.html)
 
 HTML5 & CSS3 essentials guide for app development and other comparison guides coming soon.
