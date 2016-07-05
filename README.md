@@ -10,6 +10,8 @@ So I decided to publish some guides to help learning modern HTML, CSS & JavaScri
 
 ## [From PHP to JavaScript ES6](https://cyrilletuzi.github.io/javascript-guides/php-to-javascript.html)
 
+## [From PHP 7 to TypeScript](https://cyrilletuzi.github.io/javascript-guides/php-to-typescript.html)
+
 ## [From Java to JavaScript / TypeScript](https://cyrilletuzi.github.io/javascript-guides/java-to-typescript.html)
 
 ## [From jQuery to vanilla JavaScript](https://cyrilletuzi.github.io/javascript-guides/jquery-to-javascript.html)

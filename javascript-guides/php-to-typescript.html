@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>From PHP 7 to TypeScript by Cyrille Tuzi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="../stylesheets/highlight-default-9.5.0.min.css">
+    <style>
+        .main-content pre {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .main-content pre>code {
+            white-space: pre-wrap;
+        }
+    </style>
+  </head>
+  <body>
+
+    <header class="page-header">
+      <h1 class="project-name">From PHP 7 to TypeScript</h1>
+    </header>
+
+    <div class="main-content">
+
+      <main>
+
+      <article>
+
+      <p>This is an extension of <a href="php-to-javascript.html">From PHP to JavaScript ES6 guide</a>, 
+      that you should read first.</p>
+
+      <p>In an app, errors can't be tolerated, 
+        as they were when we just used JavaScript to animate a slideshow. And so comes static data types. 
+        It's the big new feature of 
+        <a href="https://secure.php.net/" target="_blank">PHP</a> 7,
+        and the main advantage of <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>, 
+        used by major frameworks like <a href="https://angular.io" target="_blank">Angular 2</a> or 
+        <a href="http://aurelia.io" target="_blank">Aurelia</a>.</p>
+
+      <p>Furthermore, if you're working with frameworks like 
+        <a href="https://symfony.com" target="_blank">Symfony</a> or 
+        <a href="https://framework.zend.com/" target="_blank">Zend</a>, and so 
+        used to advanced object oriented programming, you'll love TypeScript. 
+        ES6 brought many new tools (like classes syntax, modules imports and exports...) in JavaScript, 
+        but some important features are still missing (like visibility modifiers, interfaces...), 
+        and you'll be frustrated about that.</p>
+
+      <p>TypeScript adds these missing features in a very clever way. 
+        Valid vanilla JavaScript is valid TypeScript : the new features are completely optional,
+        and you can come back to pure JS at any time.</p>
+
+      <p>Of course, you'll need to transform TypeScript in standard JavaScript for browsers, 
+        but for now you'd need to transform ES6+ to ES5 anyway for browsers compatibility.</p>
+
+      <p>This guide presents a comparison of the basic syntax from PHP 7 to TypeScript. 
+        Be aware this guide just <i>compare</i> languages, it does <i>not</i> explain the features.
+        A general explanation of the purpose of this page is available 
+        <a href="./" title="General explanation of the purpose of this page and other guides">here</a>, 
+        also with other guides.</p>
+
+      <h3>Simple data types</h3>
+
+      <p>PHP has always allowed explicit types, but just for conversion. 
+          TypeScript enforces types, you cannot change them afterwards. 
+          Integers and decimal numbers share the same type in JavaScript.</p>
+      
+      <pre>
+<code class="php">/* PHP */
+$userMan = (bool) true;
+$userAge = (int) 81;
+$userAverage = (float) 10.5;
+$userName = (string) 'Henri Bergson';
+$userName = 10; // OK</code>
+<code class="ts">/* TypeScript */
+let userMan: boolean = true;
+let userAge: number = 81;
+let userAverage: number = 10.5;
+let userName: string = "Henri Bergson";
+userName = 10; // Error</code>
+      </pre>
+
+      <h3>Lists data types</h3>
+
+      <p>In PHP, you just tell something is an array. In TypeScript, you specify an array of what, as 
+          arrays are only for homogeneous data in JavaScript.</p>
+
+      <pre>
+<code class="php">/* PHP */
+$books = (array) ['Book 1', 'Book 2'];
+$list = (array) ['a', 'b', 10]; // OK</code>
+<code class="ts">/* TypeScript */
+let books: string[] = ["Book 1", "Book 2"];
+let list: string[] = ['a', 'b', 10]; // Error</code>
+      </pre>
+
+      <p>As a JavaScript object is like a literal instance, you can use TypeScript interfaces as its type.</p>
+
+      <pre>
+<code class="ts">/* TypeScript */
+interface User {
+  age: number;
+  name: { first: string, last: string };
+}
+  
+let user: User = {
+  age: 81,
+  name: { first: "Henri", last: "Bergson" }
+};</code>
+      </pre>
+
+      <h3>Types in functions</h3>
+
+      <p>PHP always allowed to check classe instances for parameters.</p>
+
+      <pre>
+<code class="php">/* PHP */
+function myMethod(User $someUser) {}</code>
+<code class="ts">/* TypeScript */
+function myMethod(someUser: User) {}</code>
+      </pre>
+
+      <p>PHP 7 introduced checking for simple data types for parameters, also with return type. 
+          But be aware they are enforced only on demand.</p>
+
+      <pre>
+<code class="php">/* PHP 7 - strict */
+declare(strict_types=1);
+function myMethod(string $data): int {
+  return 10;
+}
+myMethod(20); // Error
+
+/* PHP 7 - normal */
+function myMethod(string $data): int {
+  $data; // '20'
+  return 10;
+}
+myMethod(20); // OK</code>
+<code class="ts">/* TypeScript */
+
+function myMethod(data: string): int {
+  return 10;
+}
+myMethod(20); // Error</code>
+      </pre>
+
+      <p>PHP 7.1 will allow to specify if a function has no return.</p>
+
+      <pre>
+<code class="php">/* PHP 7.1 */
+function myMethod(): void {}</code>
+<code class="ts">/* TypeScript */
+function myMethod(): void {}</code>
+      </pre>
+
+      <h3>Classes</h3>
+
+      <p>TypeScript adds pre-declared properties and visiblity modifiers, 
+        not yet available in standard JavaScript.</p>
+
+      <pre>
+<code class="php">/* PHP */
+class User {
+  public $firstName;
+  protected $lastName;
+  private $age;
+  public function __construct() {}
+}</code>
+<code class="ts">/* TypeScript */
+class User {
+  public firstName: string;
+  protected lastName: string;
+  private age: int;
+  public constructor() {}
+}</code>
+      </pre>
+
+      <p>TypeScript also adds abstract classes and 
+        <a href="http://www.typescriptlang.org/docs/handbook/interfaces.html" target="_blank">interfaces</a>.</p>
+
+      <pre>
+<code class="php">/* PHP */
+interface Movable {
+  public move();
+}
+
+class Vehicle implements Movable {
+    public move() {}
+}
+
+abstract class Test {}</code>
+<code class="ts">/* TypeScript */
+interface Movable {
+  public move(): void;
+}
+
+class Vehicle implements Movable {
+    public move(): void {}
+}
+
+abstract class Test {}</code>
+      </pre> 
+
+      <h3>JavaScript courses</h3>
+
+      <p>If you're looking for JavaScript full courses in France, check my <a href="https://formationjavascript.com/" target="_blank">training website</a>.</p>
+
+      </article>
+
+      </main>
+
+      <footer class="site-footer">
+        <span class="site-footer-credits">A project by <a href="https://www.cyrilletuzi.com/en/web/" target="_blank">Cyrille Tuzi</a>. This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </div>
+
+    <script src="../scripts/highlight-custom-9.5.0.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+  </body>
+</html>
