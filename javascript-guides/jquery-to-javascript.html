@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>From jQuery to vanilla JavaScript by Cyrille Tuzi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="../stylesheets/highlight-default-9.5.0.min.css">
+    <style>
+        .main-content pre {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .main-content pre>code {
+            white-space: pre-wrap;
+        }
+    </style>
+  </head>
+  <body>
+
+    <header class="page-header">
+      <h1 class="project-name">From jQuery to vanilla JavaScript</h1>
+    </header>
+
+    <div class="main-content">
+
+      <main>
+
+      <article>
+
+        <p><a href="https://jquery.com" target="_blank">jQuery</a> 
+            has done a great job for developers, when compatibility in old browsers was a huge problem. 
+            Fortunately <a href="http://gs.statcounter.com" target="_blank">this time is over</a>,  
+            and as all new APIs are now standardized, 
+            we need to go back to vanilla JavaScript for app development<sup>1</sup>.</p>
+
+        <p>So here is a comparison between jQuery and vanilla JavaScript. You'll realize that today,
+            native JS is not more verbose than jQuery. And if you're one of the last in the world to 
+            be concerned by old Internet Explorer, you just have to load 
+            <a href="https://cdn.polyfill.io" target="_blank">polyfill.io</a> and your vanilla JS code 
+            will work just fine.</p>
+
+        <p>Be aware this guide just <i>compare</i> languages, it does <i>not</i> explain the features. 
+        A general explanation of the purpose of this page is available 
+        <a href="./" title="General explanation of the purpose of this page and other guides">here</a>, 
+        also with other guides.</p>
+      
+      <h3>Selection</h3>
+
+      <p>Yeah, jQuery is shorter, but also slower.</p>
+      
+      <pre><code class="js">/* jQuery */
+$('#some-id');</code>
+<code class="js">/* JavaScript */
+document.getElementById('some-id');</code></pre>
+
+      <p>For multiple selection, you need to do the loop on your own in vanilla JavaScript.</p>
+      
+      <pre><code class="js">/* jQuery */
+$('#nav-list>li');</code>
+<code class="js">/* JavaScript */
+let elements = document.querySelectorAll('#nav-list>li');
+for (let element of elements) {}</code></pre>
+
+      <p>Tree navigation.</p>
+
+      <pre>
+<code class="js">/* jQuery */
+someElement.parent();
+someElement.children.eq(0);</code>
+<code class="js">/* JavaScript */
+someElement.parentNode;
+someElement.children[0];</code></pre>
+
+      <h3>HTML manipulation</h3>
+
+      <p>jQuery always uses methods (not properties).</p>
+      
+      <pre><code class="js">/* jQuery */
+someElement.text();
+someElement.text("New content");
+
+someElement.html();
+someElement.html("New content");</code>
+<code class="js">/* JavaScript */
+someElement.textContent;
+someElement.textContent = "New content";
+
+someElement.innerHTML;
+someElement.innerHTML = "New content";</code></pre>
+
+      <p>jQuery has a few special methods to normalize some properties, like form values.</p>
+      
+      <pre><code class="js">/* jQuery */
+someInputElement.val();
+someInputElement.val("New value");</code>
+<code class="js">/* JavaScript */
+someInputElement.value; // Read
+someInputElement.value = "New value"; // Write</code></pre>
+
+      <p>Custom properties.</p>
+      
+      <pre><code class="js">/* jQuery */
+element.data('customName');
+element.data('customName', "New value");</code>
+<code class="js">/* JavaScript */
+element.dataset.customName;
+element.dataset.customName = "New value";</code></pre>
+
+      <h3>CSS manipulation</h3>
+
+      <p>jQuery adds units automatically, so you can do arithmetic operations easily.</p>
+
+      <pre><code class="js">/* jQuery */
+someElement.css('margin-left', 100);</code>
+<code class="js">/* JavaScript */
+someElement.style.marginLeft = '100px';</code></pre>
+
+      <p>Class manipulation.</p>
+
+      <pre><code class="js">/* jQuery */
+element.addClass('color-main');
+element.removeClass('color-main');
+element.toggleClass('color-main');
+element.hasClass('color-main');</code>
+<code class="js">/* JavaScript */
+element.classList.add('color-main');
+element.classList.remove('color-main');
+element.classList.toggle('color-main');
+element.classList.contains('color-main');</code></pre>
+
+      <h3>Animations</h3>
+
+      <p>A <a href="https://github.com/web-animations/web-animations-js" target="_blank">Web Animations standard</a> 
+      is coming in JavaScript. For now, there is CSS3 transitions.</p>
+
+      <pre><code class="js">/* jQuery */
+element.animate({marginLeft: 100}, 
+  2000, function () {
+    // When animation is finished
+});</code>
+<code class="js">/* JavaScript */
+element.style.transition = 'margin-left 2s';
+element.addEventListener('transitionend', 
+  (event) => { // When animation is finished });
+element.style.marginLeft = '100px';</code></pre>
+
+      <p><code class="js">setTimeout()</code> has always been vanilla JavaScript.</p>
+
+      <h3>Events</h3>
+
+      <p>Event listener.</p>
+
+      <pre><code class="js">/* jQuery */
+element.on('click', function (event) {
+  event.preventDefault(); // If needed
+  // Some action          
+});</code>
+<code class="js">/* JavaScript */
+element.addEventListener('click', (event) => {
+  event.preventDefault(); // If needed
+  // Some action          
+});</code></pre>
+
+      <p>Waiting DOM is ready. Do <b>not</b> start by <code class="js">$</code> in jQuery, receive it in a local parameter 
+      to avoid conflict with other librairies.</p>
+
+      <pre>
+          <code class="js">/* jQuery */
+jQuery(function ($) {
+  // Launch all your features
+});</code>
+<code class="js">/* JavaScript */
+document.addEventListener('DOMContentLoaded', () => {
+  // Launch all your features
+});</code></pre>
+
+      <h3>JavaScript courses</h3>
+
+      <p>If you're looking for full JavaScript courses in France, check my <a href="https://formationjavascript.com/" target="_blank">training website</a>.</p>
+
+      <h3>Notes</h3>
+
+      <p><small><sup>1</sup> I'm aware of the discussion about jQuery still usefull 
+      as it corrects many remaining bugs in browsers. I'm OK with that, it's just not the purpose of this guide.</small></p>
+
+      </article>
+
+      </main>
+
+      <footer class="site-footer">
+        <span class="site-footer-credits">A project by <a href="https://www.cyrilletuzi.com/en/web/" target="_blank">Cyrille Tuzi</a>. This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </div>
+
+    <script src="../scripts/highlight-custom-9.5.0.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+  </body>
+</html>

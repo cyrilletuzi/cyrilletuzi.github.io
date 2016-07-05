@@ -8,8 +8,10 @@ So I decided to publish some guides to help learning modern HTML, CSS & JavaScri
 
 ## [HTML5 CSS3 essentials for JavaScript](https://cyrilletuzi.github.io/javascript-guides/html-css-essentials.html)
 
-## [PHP to JavaScript ES6](https://cyrilletuzi.github.io/javascript-guides/php-to-javascript.html)
+## [From PHP to JavaScript ES6](https://cyrilletuzi.github.io/javascript-guides/php-to-javascript.html)
 
-## [Java to JavaScript / TypeScript](https://cyrilletuzi.github.io/javascript-guides/java-to-typescript.html)
+## [From Java to JavaScript / TypeScript](https://cyrilletuzi.github.io/javascript-guides/java-to-typescript.html)
+
+## [From jQuery to vanilla JavaScript](https://cyrilletuzi.github.io/javascript-guides/jquery-to-javascript.html)
 
 ## [DOM essentials for JavaScript frameworks](https://cyrilletuzi.github.io/javascript-guides/dom-essentials.html)
