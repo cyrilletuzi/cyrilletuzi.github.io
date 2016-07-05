@@ -11,3 +11,5 @@ So I decided to publish some guides to help learning modern HTML, CSS & JavaScri
 ## [PHP to JavaScript ES6](https://cyrilletuzi.github.io/javascript-guides/php-to-javascript.html)
 
 ## [Java to JavaScript / TypeScript](https://cyrilletuzi.github.io/javascript-guides/java-to-typescript.html)
+
+## [DOM essentials for JavaScript frameworks](https://cyrilletuzi.github.io/javascript-guides/dom-essentials.html)

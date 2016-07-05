@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>DOM essentials for JavaScript frameworks by Cyrille Tuzi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="../stylesheets/highlight-default-9.5.0.min.css">
+    <style>
+        .main-content pre {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-content pre>code {
+            white-space: pre-wrap;
+        }
+    </style>
+  </head>
+  <body>
+
+    <header class="page-header">
+      <h1 class="project-name">DOM essentials for JavaScript frameworks</h1>
+    </header>
+
+    <div class="main-content">
+
+      <main>
+
+      <article>
+
+        <p>In frameworks like 
+            <a href="https://angular.io" target="_blank">Angular 2</a> or 
+            <a href="https://facebook.github.io/react/" target="_blank">React</a>, 
+            you'll never manipulate the Document Object Model directly : you'll use their own templating systems, 
+            so the framework can manage automatic data binding and optimize performances.</p>
+
+        <p>But these templating systems are modeled on native DOM. So it helps to have good basics, 
+            to know what you can do and what's going on.</p>
+
+        <p>Be aware this guide does <i>not</i> explain all the features in details, 
+        it is not appropriate to programming beginners.
+        A general explanation of the purpose of this page is available 
+        <a href="./" title="General explanation of the purpose of this page and other guides">here</a>, 
+        also with other guides, especially <a href="html-css-essentials.html">HTML5 CSS3 essentials for JavaScript</a> 
+        you should read first, as the DOM is about manipulating HTML and CSS.</p>
+      
+      <h3>DOM selection</h3>
+
+      <p>Most of the time, you'll just pick one element. It's the most effective way.</p>
+      
+      <pre><code class="js">let someElement = document.getElementById('some-id');</code></pre>
+
+      <p>For multiple or complex selection, you can use 
+          <a href="html-css-essentials.html">CSS selectors</a> 
+          you (should) already know. Then you'll need to do a loop on each element.</p>
+      
+      <pre><code class="js">let someElements = document.querySelectorAll('#nav-list>li');
+for (let element of someElements) {}</code></pre>
+
+      <p>Sometimes you'll already be somewhere in the DOM, and you'll need to navigate up or down the tree. 
+          Do <b>not</b> use <code class="js">childNodes</code>, <code class="js">firstChild</code> 
+          and <code class="js">lastChild</code>, they will lead to troubles.
+      </p>
+
+      <pre><code class="js">someElement.parentNode;
+someElement.children[0];</code></pre>
+
+      <h3>DOM content : HTML manipulation</h3>
+
+      <p>Main thing you'll do is to read or modifiy the content of an element. You can change it like raw text 
+          (when possible, it's better for performance and security) or like HTML content.</p>
+      
+      <pre><code class="js">someElement.textContent; // Read
+someElement.textContent = "New content"; // Write
+
+someElement.innerHTML; // Read
+someElement.innerHTML = "New content"; // Write</code></pre>
+
+      <p>DOM elements are objects, so HTML attributes are just properties in JavaScript and you can access
+          them directly. For example :</p>
+      
+      <pre><code class="js">someInputElement.value; // Read
+someInputElement.value = "New value"; // Write</code></pre>
+
+      <p>HTML5 allows you to store data in your own custom attributes. They need to start with 
+          <code class="html">data-</code> and JavaScript has a special property for them. 
+          Be careful with the difference of naming convention.
+      </p>
+      
+      <pre><code class="html">&lt;p data-custom-name="Some value"&gt;&lt;/p&gt;
+        
+</code><code class="js">myParagraphElement.dataset.customName; // Read
+myParagraphElement.dataset.customName = "New value"; // Write</code></pre>
+
+      <h3>DOM styles : CSS manipulation</h3>
+
+      <p>The most direct way to modify CSS is to access the style property. 
+          Be careful with the difference of naming convention.
+          It's OK for a functional modification (like moving an element), 
+          but <b>never</b> do that for a graphic modification : graphics belong to CSS.</p>
+
+      <pre><code class="js">someElement.style.marginLeft = '100px';</code></pre>
+
+      <p>For graphics, manipulate classes. Do <b>not</b> use <code class="js">class</code> 
+      (it does not exist, it is a reserved keyword for another feature) or 
+      <code class="js">className</code> as it would delete potentials other existing classes.</p>
+
+      <pre><code class="js">someElement.classList.add('color-main');
+someElement.classList.remove('color-main');
+someElement.classList.toggle('color-main');
+someElement.classList.contains('color-main');</code></pre>
+
+      <p>Notice we didn't try to read current styles. It's not relevant, 
+          except for a few special properties : <code class="js">offsetWidth</code>, <code class="js">offsetHeight</code>, 
+          <code class="js">offsetTop</code>, <code class="js">offsetLeft</code>.</p>
+
+      <h3>DOM animations</h3>
+
+      <p>The easy way : <a href="html-css-essentials.html">CSS3 transitions</a>, 
+          with the <code class="js">transitionend</code> event to know when it's finished.</p>
+
+      <p>Sometimes you'll need to manage some part of animations manually, with timers. 
+          <b>Do</b> use the new ES6 arrow function syntax, or it will lead to troubles.
+          Times are always in milliseconds in JavaScript.</p>
+
+      <pre><code class="js">let differed = setTimeout(() => {
+  // Some styles manipulation    
+}, 2000);</code></pre>
+
+      <p>If necessary, you can stop a timer with <code class="js">clearTimeout(differed)</code>.</p>
+
+      <p>Be aware it is <b>asynchronous</b>, as mostly everything in JavaScript. 
+      It means JS does <b>not</b> wait 2 seconds to continue the script. 
+      So be careful to where your next action should be placed.</p>
+
+      <h3>DOM events</h3>
+
+      <p>Do <b>not</b> you use the old properties like <code class="js">onclick</code>, 
+       <code class="js">onmouseover</code> and so on, as you can only manage one listener with them. 
+       And with vanilla JavaScript, <b>never</b> do inline events in HTML, 
+       they can be forbidden by a new security option in HTML5 called 
+      <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Using_Content_Security_Policy" target="_blank">Content Security Policy</a>
+       (frameworks will allow that but only because it's part 
+       of their templating system, which is then transformed).</p>
+
+      <pre><code class="js">someElement.addEventListener('click', (event) => {
+  // Some action          
+});</code></pre>
+
+      <p>Main events are : <code class="js">click</code>, <code class="js">mouseenter</code>, 
+      <code class="js">mouseleave</code>, <code class="js">input</code>, <code class="js">keyup</code>, 
+      <code class="js">submit</code>, <code class="js">focus</code>, <code class="js">blur</code>. 
+      You do <b>not</b> need touch events for normal situations, as a touch on a link fires a 
+      <code class="js">click</code> event too.</p>
+
+      <p>Be aware all DOM manipulations are only possible if the elements are loaded. So you should always 
+          wait the DOM is ready. Do <b>not</b> use the <code class="js">load</code> event as it waits for full 
+          ressources loading which is really too late. Be careful with the naming syntax.</p>
+
+      <pre><code class="js">document.addEventListener('DOMContentLoaded', (event) => {
+  // Launch all your features
+});</code></pre>
+
+      <p>You'll receive an <code class="js">event</code> object as parameter, with information dependent on 
+      what's going on (mouse position, key pressed...). You'll always know from what element 
+      the event started with :</p>
+
+      <pre><code class="js">someElement.addEventListener('click', (event) => {
+  event.target;
+});</code></pre>
+
+      <p>Last but not least, you can cancel the default behavior of the event. For example, 
+          prevent a click on a link to redirect to the target page. It's very important for 2 reasons :
+          on normal websites, main features (navigation...) should keep default behaviors which don't need JavaScript 
+          for many situations (SEO, accessibility, slow network, overloaded server, unforeseen error...) 
+          and in an app, the page must never change.</p>
+
+      <pre><code class="js">someElement.addEventListener('click', (event) => {
+  event.preventDefault();
+});</code></pre>
+
+      <h3>JavaScript courses</h3>
+
+      <p>If you're looking for full JavaScript courses in France, check my <a href="https://formationjavascript.com/" target="_blank">training website</a>.</p>
+
+      </article>
+
+      </main>
+
+      <footer class="site-footer">
+        <span class="site-footer-credits">A project by <a href="https://www.cyrilletuzi.com/en/web/" target="_blank">Cyrille Tuzi</a>. This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </div>
+
+    <script src="../scripts/highlight-custom-9.5.0.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+  </body>
+</html>
