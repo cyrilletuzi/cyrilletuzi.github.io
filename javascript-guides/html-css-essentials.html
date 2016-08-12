@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>HTML5 CSS3 essentials for JavaScript by Cyrille Tuzi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://formationjavascript.com/guides/essentiel-html-css-pour-javascript/" rel="alternate" hreflang="fr">
     <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
@@ -52,6 +53,8 @@
         <p>Be aware this guide does <i>not</i> explain all the features in details, 
         it is not appropriate to programming beginners.
         A general explanation of the purpose of this page is available <a href="./" title="General explanation of the purpose of this page and other guides">here</a>, also with other guides.</p>
+
+        <p><a href="https://formationjavascript.com/guides/essentiel-html-css-pour-javascript/" rel="alternate" hreflang="fr">A French version of this guide is available here / une version française de ce guide est disponible ici.</a></p>
 
       <h2>HTML5 essentials</h2>
       
@@ -273,8 +276,11 @@
       <p>Now we can select anything in the page to style them in CSS, but <b>you'll also use 
           the same selectors in JavaScript</b> to manipulate elements.</p>
 
-      <pre><code class="css">h1 {}
+      <pre><code class="css">/* By type */
+h1 {}
+/* By class */
 .title {}
+/* By id */
 #page-title {}</code></pre>
 
       <p>Factoring.</p>
@@ -285,9 +291,9 @@ h2 {}</code></pre>
       <p>Tree-based selectors. As you can see, a space has a meaning in CSS selectors, so do <b>not</b> 
       put unnecessary spaces, it will lead to wrong selectors.</p>
 
-      <pre><code class="css">&lt;!-- All descendants (elements of the list and any sublists) --&gt;
+      <pre><code class="css">/* All descendants (elements of the list and any sublists) */
 #header-nav-list li {}
-&lt;!-- Children only (elements of this list only) --&gt;
+/* Children only (elements of this list only) */
 #header-nav-list>li {}</code></pre>
 
       <p>Attribute selector.</p>
