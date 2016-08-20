@@ -122,6 +122,7 @@ a {
   color: #383e41;
   border-radius: 0.3rem; }
 .main-content pre {
+  background: rgb(39, 40, 34);
   padding: 0.8rem;
   margin-top: 0;
   margin-bottom: 1rem;
@@ -136,7 +137,6 @@ a {
     font-size: 0.9rem;
     word-break: normal;
     white-space: pre;
-    background: transparent;
     border: 0; }
 .main-content .highlight {
   margin-bottom: 1rem; }
@@ -157,7 +157,6 @@ a {
   overflow: initial;
   line-height: inherit;
   word-wrap: normal;
-  background-color: transparent;
   border: 0; }
   .main-content pre code:before, .main-content pre code:after, .main-content pre tt:before, .main-content pre tt:after {
     content: normal; }
