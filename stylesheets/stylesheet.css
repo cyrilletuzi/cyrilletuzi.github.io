@@ -129,14 +129,12 @@ a {
   font: 1rem Consolas, "Liberation Mono", Menlo, Courier, monospace;
   color: #567482;
   word-wrap: normal;
-  background-color: #f3f6fa;
   border: solid 1px #dce6f0;
   border-radius: 0.3rem; }
   .main-content pre > code {
     padding: 0;
     margin: 0;
     font-size: 0.9rem;
-    color: #567482;
     word-break: normal;
     white-space: pre;
     background: transparent;
