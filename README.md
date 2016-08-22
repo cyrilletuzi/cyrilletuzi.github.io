@@ -16,6 +16,8 @@ So I decided to publish some guides to help learn modern HTML, CSS & JavaScript.
 
 ## [From Java to JavaScript / TypeScript](https://cyrilletuzi.github.io/javascript-guides/java-to-typescript.html)
 
+## [From C# to JavaScript / TypeScript](https://cyrilletuzi.github.io/javascript-guides/csharp-to-typescript.html)
+
 ## [From jQuery to vanilla JavaScript](https://cyrilletuzi.github.io/javascript-guides/jquery-to-javascript.html)
 
 ## [DOM essentials for JavaScript frameworks](https://cyrilletuzi.github.io/javascript-guides/dom-essentials.html)
