@@ -2,9 +2,8 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>From Java to JavaScript / TypeScript by Cyrille Tuzi</title>
+    <title>From C# to JavaScript / TypeScript by Cyrille Tuzi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://formationjavascript.com/guides/de-java-a-javascript-typescript/" rel="alternate" hreflang="fr">
     <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
@@ -25,7 +24,7 @@
   <body>
 
     <header class="page-header">
-      <h1 class="project-name">From Java to JavaScript / TypeScript</h1>
+      <h1 class="project-name">From C# to JavaScript / TypeScript</h1>
     </header>
 
     <div class="main-content">
@@ -34,61 +33,58 @@
 
       <article>
 
-        <p>This guide presents a syntax comparison between 
-          <a href="https://www.oracle.com/java/index.html" target="_blank">Java</a> (8 minimum)
+      <p>This guide presents a syntax comparison between 
+          <a href="https://msdn.microsoft.com/fr-fr/library/kx37x362.aspx" target="_blank">C#</a> 
           and JavaScript 
           (<a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm" target="_blank">ES6/ES2015 minimum</a>)
           / TypeScript.</p>
 
-      <p>You'll find <a href="./">other guides and a general explanation here</a>, 
-      and a <a href="https://formationjavascript.com/guides/de-java-a-javascript-typescript/" rel="alternate" hreflang="fr">French version here</a>.</p>
+      <p>You'll find <a href="./">other guides and a general explanation here</a>.</p>
 
       <p>Why <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a> ?
-        As a Java developer, you'll love it,
+        As a C# developer, you'll love it,
         and <a href="why-typescript.html" title="Why TypeScript ?">we explain why here</a>. 
         This guide tells clearly when a feature is TypeScript specific. 
         Eveything else is standard JavaScript.</p>
-
+      
       <h3>Data declarations</h3>
 
-      <p>In JavaScript, variables can be declared globally and values are always mutable. 
+      <p>In JavaScript, variables can be declared globally. 
           Since ES6, use only the 
           <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" target="_blank"><code class="js">let</code> keyword</a>.</p>
       
       <pre>
-        <code class="java">/* Java */
-String myData = "java";
-myData = "new"; // Error</code>
+        <code class="csharp">/* C# */
+var myData = "csharp";</code>
         <code class="ts">/* JavaScript */
-let myData = "js";
-myData = "new"; // OK</code>
+let myData = "js";</code>
       </pre>
 
       <p>ES6 introduced global <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const" target="_blank">constants</a> 
-      in JavaScript. Complex values can be used and therefore manipulated.</p>
+      in JavaScript. Unlike C#, complex values can be used and therefore manipulated.</p>
       
       <pre>
-<code class="java">/* Java */
-final String MY_DATA = "java";</code>
+<code class="csharp">/* C# */
+const string myData = "csharp";
+readonly User myUser = new User();</code>
 <code class="ts">/* JavaScript */
 const MY_DATA = "js";
-const MY_USER = new User(); // OK
-MY_USER.name = "New name";</code>
+const MY_USER = new User();</code>
       </pre>
 
       <h3>Simple data types</h3>
 
-      <p>In vanilla JavaScript, data types are dynamic (a variable can change its type at any time),
+      <p>Unlike C#, data types are dynamic in vanilla JavaScript (a variable can change its type at any time),
          and you don't need to specify them (they are automatically detected). 
         TypeScript adds manifest and <a href="http://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">static types</a>. 
         All numbers share the same type in JavaScript.</p>
       
       <pre>
-<code class="java">/* Java */
-boolean userMan = true;
+<code class="csharp">/* C# */
+bool userMan = true;
 int userAge = 81;
 float userAverage = 10.5;
-String userName = "Henri Bergson";</code>
+string userName = "Henri Bergson";</code>
 <code class="ts">/* TypeScript */
 let userMan: boolean = true;
 let userAge: number = 81;
@@ -101,16 +97,16 @@ let userName: string = "Henri Bergson";</code>
 
       <h3>String details</h3>
 
-      <p>You can use either single or doubles quotes for strings. 
+      <p>Unlike C#, you can use either single or doubles quotes for strings in JavaScript. 
         ES6 introduced <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" target="_blank">template literals</a> : 
         new backtick quotes for variable interpolation and allowing line breaks.
         Avoid classic concatenation in JavaScript, as it's confusing with additions and will lead to type errors.
       </p>
 
       <pre>
-<code class="java">/* Java */
-String userFullName  = 
-  userFirstName + " " + userLastName;</code>
+<code class="csharp">/* C# */
+string userFullName  = 
+  $"{userFirstName} {userLastName};</code>
 <code class="ts">/* JavaScript (except type) */
 let userFullName: string = 
   `${userFirstName} ${userLastName}`;</code>
@@ -125,15 +121,16 @@ let HTMLTemplate: string = `&lt;p class="content"&gt;I'm Henri !&lt;/p&gt;`;</co
 
       <h3>Data lists</h3>
 
-      <p>Size of arrays is always dynamic in JavaScript.</p>
+      <p>Unlike C#, size of arrays is always dynamic in JavaScript, 
+        so you can add items at any time.</p>
 
       <pre>
-<code class="java">/* Java */
-List&lt;String&gt; userBooks = 
-  new ArrayList&lt;&gt;();
-userBooks.add("Book 1");
-userBooks.get(0);
-userBooks.size();</code>
+<code class="csharp">/* C# */
+string[] userBooks = 
+  {"Book 1", "Book 2"};
+// Use List if you need to add items
+userBooks[0];
+userBooks.Length;</code>
 <code class="ts">/* JavaScript (except type) */
 let userBooks: string[] = 
   ["Book 1", "Book 2"];
@@ -142,15 +139,15 @@ userBooks[0];
 userBooks.length;</code>
       </pre>
 
-      <p>Hash maps are called objects in JavaScript, with string keys.</p>
+      <p>C# dictionaries are called objects in JavaScript, with string keys.</p>
 
       <pre>
-<code class="java">/* Java */
-Map&lt;String, String&gt; user = 
-  new HashMap&lt;&gt;();
-user.put("firstName", "Henri");
-user.put("lastName", "Bergson");
-user.get("firstName");</code>
+<code class="csharp">/* C# */
+Dictionary&lt;string, string&gt; user = 
+  new Dictionary&lt;string, string&gt;();
+user.Add("firstName", "Henri");
+user.Add("lastName", "Bergson");
+user["firstName"];</code>
 <code class="ts">/* JavaScript */
 let user = {
   firstName: "Henri", 
@@ -178,18 +175,17 @@ let user: User = {
         <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" target="_blank">Map</a>, 
         <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set" target="_blank">Set</a>, 
         <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap" target="_blank">WeakMap</a>, 
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet" target="_blank">WeakSet</a>. 
-        You could also be interested by the 
-        <a href="https://facebook.github.io/immutable-js/" target="_blank">Immutable JavaScript library</a>.</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet" target="_blank">WeakSet</a>.</p>
 
       <h3>Blocks</h3>
 
-      <p>Same syntax for conditions.</p>
+      <p>Same syntax for conditions in C# and JavaScript.</p>
 
-      <p>Since ES6, thanks to <code class="js">let</code>, variables are block-scoped.</p>
+      <p>Since ES6, thanks to <code class="js">let</code>, variables are block-scoped. 
+      Unlike C#, a child block variable can overrirde a parent block variable in JavaScript.</p>
 
       <pre>
-<code class="java">/* Java */
+<code class="csharp">/* C# */
 for (int i = 0; i < 10; i++) {}</code>
 <code class="ts">/* JavaScript (except types) */
 for (var i: number = 0; i < 10; i++) {}
@@ -201,11 +197,11 @@ i; // undefined</code>
 
       <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of" target="_blank">Iteration</a> 
         is simplified in ES6. 
-        Do not indicate the type of <code class="ts">value</code> in TypeScript (it's automatically inferred).</p>
+        Do <b>not</b> use <code class="ts">for ... in</code> in JavaScript, it's <b>not</b> for arrays.</p>
 
       <pre>
-<code class="java">/* Java */
-for (String value: userBooks) {}</code>
+<code class="csharp">/* C# */
+for (var value in userBooks) {}</code>
 <code class="ts">/* JavaScript */
 for (let value of userBooks) {}</code>
       </pre>
@@ -214,9 +210,9 @@ for (let value of userBooks) {}</code>
       (with values <i>and</i> keys, only for arrays).</p>
 
       <pre>
-<code class="java">/* Java */
-for (int i = 0; i < books.size(); i++) {
-    books.get(i);
+<code class="csharp">/* C# */
+for (int i = 0; i < books.Count; i++) {
+    books[i];
 }</code>
 <code class="ts">/* JavaScript (except types) */
 books.foreach(
@@ -228,19 +224,14 @@ books.foreach(
       <p>In JavaScript, you can access parent scopes directly.</p>
 
       <pre>
-<code class="java">/* Java */
-String myData = "java";
-void myMethod() {
-  myData; // error
-}</code>
 <code class="ts">/* JavaScript (except types) */
-let myData: string = "js";
+let myData: string = "value";
 function myMethod(): void {
-  myData; // "js"
+  myData; // "value"
 }</code>
       </pre>
 
-      <p>No overloading in JavaScript (a function can only have one definition), 
+      <p>Unlike C#, no overloading in JavaScript (a function can only have one definition), 
           and parameters are always optional. 
           ES6 introduced <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters" target="_blank">default values</a>.
           TypeScript allow automatic required arguments without manual checking 
@@ -248,25 +239,30 @@ function myMethod(): void {
       </p>
 
       <pre>
-<code class="java">/* Java */
-void myMethod(String required) {
-  myMethod(required, "default");
+<code class="csharp">/* C# */
+void myMethod(string required, 
+    string optional = "default") {}</code>
+<code class="ts">/* JavaScript */
+function myMethod(requiredToCheck, 
+    optional = "default"): void {
+     /* Simple comparison is important
+      * as it can be undefined too */
+    if (requiredToCheck == null) {}
 }
-void myMethod
-  (String required, String optional) {}</code>
-<code class="ts">/* JavaScript  (except types) */
-function myMethod
-  (required: string, 
+
+/* TypeScript */
+function myMethod(requiredForReal: string, 
     optional: string = "default"): void {}</code>
       </pre>
 
       <p>ES6 introduced a shorter anonymous functions syntax, named 
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank">arrow functions</a>.</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank">arrow functions</a>,
+      equivalent to lamba expressions in C#.</p>
 
       <pre>
-<code class="java">/* Java */
-numbersList.stream()
-  .filter(value -> value > 2);</code>
+<code class="csharp">/* C# */
+numbersList.
+  .Where(value => value > 2);</code>
 <code class="ts">/* JavaScript (except type) */
 numbersList
   .filter((value: number) => value > 2);</code>
@@ -274,15 +270,15 @@ numbersList
 
       <h3>Built-in methods</h3>
 
-      <p>Some basic methods. Note that <code class="ts">length</code> is a property (not a method) in JavaScript.</p>
+      <p>Some basic methods.</p>
 
       <pre>
-<code class="java">/* Java */
-myEmail.indexOf("@");
-myEmail.replaceAll("(.*)@(.*)", " at ");
-myEmail.substring(0, 5);
-myEmail.length();
-Integer.parseInt("10");</code>
+<code class="csharp">/* C# */
+myEmail.IndexOf("@");
+myEmail.Replace("@", " at ");
+myEmail.Substring(0, 5);
+myEmail.Length;
+Int32.Parse("10");</code>
 <code class="ts">/* JavaScript */
 myEmail.strpos("@");
 myEmail.replace("@", " at ");
@@ -299,24 +295,25 @@ parseInt("10");</code>
 
       <p>ES6 introduced <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes" target="_blank">classes syntax</a>, 
         to simplify object oriented programming in JavaScript. 
-        Properties are directly created in the constructor. 
+        Properties are directly created in the constructor, and unlike C#,
+        you must refer to them via <code class="ts">this</code>. 
         Pre-declared properties and visibility modifiers are missing in ES7 : 
         they may appear in future JavaScript versions, but 
         <a href="http://www.typescriptlang.org/docs/handbook/classes.html" target="_blank">TypeScript allows them right now</a>.</p>
 
       <pre>
-<code class="java">/* Java */
+<code class="csharp">/* C# */
 public class User {
-  public String firstName;
-  public User(String firstName) {
-    this.firstName = firstName;
+  public string FirstName;
+  public User(string firstName) {
+    FirstName = firstName;
   }
-  public void sayHello() {}
+  public void SayHello() {}
 }
 
 User myUser = new User("Henri");
-myUser.firstName;
-myUser.sayHello();</code>
+myUser.FirstName;
+myUser.SayHello();</code>
 <code class="ts">/* JavaScript + TypeScript */
 class User {
   public firstName: string;
@@ -331,16 +328,17 @@ myUser.firstName;
 myUser.sayHello();</code>
       </pre>
 
-      <p>In JavaScript inheritance, parent call is <b>required</b> in the child constructor.</p>
+      <p>In JavaScript inheritance, parent call is <b>required</b> in the child constructor,
+      and you can override methods (no specific keyword required, unlike C#).</p>
 
       <pre>
-<code class="java">/* Java */
-public class Editor extends User {
-  public Editor(String firstName) {
-    super(firstName);
+<code class="csharp">/* C# */
+public class Editor: User {
+  public Editor(string firstName) {
+    base(firstName);
   }
-  public void sayHello() {
-    super.sayHello();
+  public override void SayHello() {
+    base.SayHello();
   }
 }</code>
 <code class="ts">/* JavaScript (except types) */
@@ -354,30 +352,33 @@ class Editor extends User {
 }</code>
       </pre>
 
-      <p>Getters and setters have a special syntax in JavaScript (but you can do classic accessors too).
-          Do not pre-declared the property, it is done internally.</p>
+      <p>Like in C#, getters and setters have a special syntax in JavaScript.</p>
 
       <pre>
-<code class="java">/* Java */
+<code class="csharp">/* C# */
 public class User {
-  protected String name;
-  public String getName() {
-    return this.name;
-  }
-  public void setName(String newName) {
-    this.name = newName;
+  private string name;
+  public string Name {
+    get() { 
+        return name;
+    }
+    set() {
+      name = value;
+    }
   }
 }
 
 User myUser = new User("Henri");
-myUser.getName();
-myUser.setName("New name");</code>
+myUser.Name;
+myUser.Name = "New name";</code>
 <code class="ts">/* JavaScript (except types) */
 class User {
   protected _name: string;
+
   public get name(): string {
     return this._name;
   }
+
   public set name(newName: string) {
     this._name = newName;
   }
@@ -388,7 +389,7 @@ myUser.name;
 myUser.name = "New name";</code>
       </pre>
 
-      <p>Same syntax for static methods in JavaScript.</p>
+      <p>Same syntax for static methods in C# and JavaScript.</p>
 
       <pre>
 <code class="ts">/* JavaScript (except type) */
@@ -403,19 +404,19 @@ Utilities.filter();</code>
         <a href="http://www.typescriptlang.org/docs/handbook/interfaces.html" target="_blank">interfaces</a>.</p>
 
       <pre>
-<code class="java">/* Java */
-public interface Movable {
-  public void move();
+<code class="csharp">/* C# */
+interface Movable {
+  void Move();
 }
 
-public class Vehicle implements Movable {
-    public void move() {}
+public class Vehicle: Movable {
+    public void Move() {}
 }
 
 public abstract class Test {}</code>
 <code class="ts">/* TypeScript */
 interface Movable {
-  public move(): void;
+  public Mve(): void;
 }
 
 class Vehicle implements Movable {
@@ -436,14 +437,15 @@ abstract class Test {}</code>
         it's better to configure the loader to automatically add the right extension.</p>
 
       <pre>
-<code class="java">/* Java */
-// User.java
-package accounts;
+<code class="csharp">/* C# */
+// User.cs
+namespace Accounts
+{
+    public class User {}
+}
 
-public class User {}
-
-// script.java
-import accounts.User;
+// script.cs
+using Accounts;
 
 User myUser = new User();</code>
 <code class="ts">/* JavaScript (except type) */
@@ -467,10 +469,7 @@ let myUser: User = new User();</code>
       </main>
 
       <footer class="site-footer">
-        <span class="site-footer-credits">A project by <a href="https://www.cyrilletuzi.com/en/web/" target="_blank">Cyrille Tuzi</a>. 
-        Thanks to <a href="https://twitter.com/lpenet" target="_blank">Ludovic Pénet</a> 
-        and <a href="https://www.linkedin.com/in/aurélien-larive-767928a" target="_blank">Aurélien Larive</a>
-        who checked the Java code.<br>
+        <span class="site-footer-credits">A project by <a href="https://www.cyrilletuzi.com/en/web/" target="_blank">Cyrille Tuzi</a>.<br>
         This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
 
