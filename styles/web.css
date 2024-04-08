@@ -1,0 +1,386 @@
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(../fonts/open-sans.woff2) format('woff2'), url(../fonts/open-sans.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(../fonts/open-sans-bold.woff2) format('woff2'), url(../fonts/open-sans-bold.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Open Sans Italic'), local('OpenSans-Italic'), url(../fonts/open-sans-italic.woff2) format('woff2'), url(../fonts/open-sans-italic.woff) format('woff');
+}
+
+
+
+@media all {
+
+    /* GENERAL */
+
+    body {
+        background: linear-gradient(to right, rgba(240, 240, 240, 0.5), rgb(255, 255, 255), rgba(240, 240, 240, 0.5));
+        color: rgb(38, 50, 56);
+        font-family: 'Open Sans', Arial, sans-serif;
+        font-size: 90%;
+        line-height: 1.5;
+    }
+
+    h1 {
+        font-size: 1.9em;
+    }
+
+    figure {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    img {
+        vertical-align: middle;
+    }
+
+    a {
+        color: rgb(38, 50, 56);
+    }
+
+    li {
+        margin-bottom: 3px;
+    }
+
+    small,
+    .details {
+        color: rgba(38, 50, 56, 0.6);
+    }
+
+    .unsupported {
+        background-color: rgb(255, 235, 59);
+        border: 1px solid rgb(255, 87, 34);
+        padding: 2px 5px;
+    }
+
+    .unsupported a {
+        color: rgb(0, 0, 0);
+    }
+
+    details>summary {
+        text-decoration: underline;
+    }
+
+    details>ul {
+        font-size: 0.9em;
+    }
+
+    #wrapper {
+        margin: 0 auto;
+        max-width: 840px;
+        padding: 0 5px;
+    }
+
+    .section-title {
+        background-color: rgb(100, 100, 100);
+        color: rgb(255, 255, 255);
+        padding: 2px 10px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .skill-list {
+        padding-left: 20px;
+    }
+
+    .training-list,
+    #interests-list {
+        padding-left: 5px;
+    }
+
+    .training-item,
+    .interests-item {
+        list-style-position: inside;
+    }
+
+    /* HEADER */
+
+    #header-lang {
+        text-align: right;
+    }
+
+    #header-lang>li {
+        display: inline-block;
+        list-style: none;
+    }
+
+    #header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #header-title {
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+
+    #header-age {
+        margin-top: 0;
+    }
+
+    #header-photo>img {
+        border: 1px solid rgb(150, 150, 150);
+        border-radius: 50%;
+    }
+
+    #contact-list li {
+        margin-bottom: 0;
+    }
+
+    .contact-twitter {
+        list-style-image: url(../images/social-icons/twitter.png);
+    }
+
+    .contact-linkedin {
+        list-style-image: url(../images/social-icons/linkedin.png);
+    }
+
+    .contact-gmail {
+        list-style-image: url(../images/social-icons/gmail.png);
+    }
+
+    .contact-github {
+        list-style-image: url(../images/social-icons/github.png);
+    }
+
+    .contact-medium {
+        list-style-image: url(../images/social-icons/medium.png);
+    }
+
+    #profile-title {
+        margin-bottom: 10px;
+    }
+
+    /* SKILLS */
+
+    #skills-title {
+        background-color: rgba(0, 150, 136, 0.9);
+        background: linear-gradient(to right, rgba(0, 150, 136, 0.9), rgba(0, 150, 136, 0.5));
+    }
+
+    .skill-list strong {
+        color: rgb(0, 150, 136);
+    }
+
+    #skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .skill {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    /* JOBS */
+
+    .job h3 {
+        margin-bottom: 0;
+    }
+
+    .job .job-details {
+        margin-top: 0;
+    }
+
+    #jobs-title {
+        background-color: rgba(233, 30, 99, 0.9);
+        background: linear-gradient(to right, rgba(233, 30, 99, 0.9), rgba(233, 30, 99, 0.5));
+    }
+
+    .job-duration {
+        color: rgb(233, 30, 99)
+    }
+
+    .job {
+        border-bottom: 1px dotted rgb(150, 150, 150);
+    }
+
+    .job>details {
+        margin-bottom: 15px;
+    }
+
+    .job:last-of-type {
+        border-bottom: none;
+    }
+
+    /* TRAININGS */
+
+    #trainings-title {
+        background-color: rgba(3, 169, 244, 0.9);
+        background: linear-gradient(to right, rgba(3, 169, 244, 0.9), rgba(3, 169, 244, 0.5));
+        margin-bottom: 0;
+    }
+
+    .training {
+        border-bottom: 1px dotted rgb(150, 150, 150);
+    }
+
+    .training:last-of-type {
+        border-bottom: none;
+    }
+
+    .training-list {
+        column-count: 2;
+    }
+
+    .training-item {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    #trainings-certified {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #training-certified-logo {
+        float: right;
+        margin-top: -50px;
+    }
+
+    #trainings-certified a {
+        color: rgb(3, 169, 244);
+    }
+
+    /* REFERENCES */
+
+    #references-title {
+        background-color: rgba(229, 28, 35, 0.9);
+        background: linear-gradient(to right, rgba(229, 28, 35, 0.9), rgba(229, 28, 35, 0.5));
+    }
+
+    .reference-highlight {
+        color: rgb(229, 28, 35);
+    }
+
+    .reference {
+        border-bottom: 1px dotted rgb(150, 150, 150);
+        padding-bottom: 10px;
+    }
+
+    .reference:last-of-type {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .reference-development {
+        column-count: 2;
+        text-align: justify;
+    }
+
+    .reference-development>figure {
+        width: 100%;
+    }
+
+    .reference-development>div {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    /* INTERESTS */
+
+    #interests-title {
+        background-color: rgba(156, 39, 176, 0.9);
+        background: linear-gradient(to right, rgba(156, 39, 176, 0.9), rgba(156, 39, 176, 0.5));
+    }
+
+    #interests-list {
+        column-count: 3;
+    }
+
+}
+
+/* RESPONSIVE DESIGN */
+
+@media all and (max-width: 729px) {
+
+    img {
+        height: auto;
+        max-width: 100%;
+    }
+
+    #interests-list {
+        column-count: 2;
+    }
+
+}
+
+@media all and (max-width: 569px) {
+
+    .training-list,
+    .reference-development {
+        column-count: 1;
+    }
+
+}
+
+@media all and (max-width: 479px) {
+
+    #skills-list,
+    #interests-list {
+        column-count: 1;
+    }
+
+}
+
+/* PRINT */
+
+@media print {
+
+    .no-print {
+        display: none;
+    }
+
+    * {
+        box-shadow: none !important;
+        font-size: 1em;
+        text-shadow: none !important;
+    }
+
+    body {
+        background: transparent !important;
+    }
+
+    img {
+        page-break-inside: avoid;
+    }
+
+    ul {
+        padding-left: 10px;
+    }
+
+    .details {
+        font-size: 0.8em;
+    }
+
+    #contact-list {
+        padding-left: 40px;
+    }
+
+    #header-photo>img {
+        max-height: 90px;
+        width: auto;
+    }
+
+    #profile-title {
+        font-size: 1.5em;
+    }
+
+    .section-title {
+        font-size: 1.4em;
+    }
+
+}
