@@ -138,8 +138,8 @@
         margin-bottom: 0;
     }
 
-    .contact-twitter {
-        list-style-image: url(../images/social-icons/twitter.png);
+    .contact-bluesky {
+        list-style-image: url(../images/social-icons/bluesky.jpeg);
     }
 
     .contact-linkedin {
@@ -154,8 +154,8 @@
         list-style-image: url(../images/social-icons/github.png);
     }
 
-    .contact-medium {
-        list-style-image: url(../images/social-icons/medium.png);
+    .contact-devto {
+        list-style-image: url(../images/social-icons/devto.png);
     }
 
     #profile-title {
